@@ -30,7 +30,7 @@
 
 - git clone
 
-- 使用 PyCharm 打开该文件夹（或者可以直接在 pycharm 里面 git clone，参考 https://blog.csdn.net/hxj0323/article/details/109208253）
+- 使用 PyCharm 打开该文件夹（或者可以直接在 pycharm 里面 git clone，参考 https://blog.csdn.net/hxj0323/article/details/109208253 
 
 - file -> settings -> Project，右边选择 Python Interpreter
 
