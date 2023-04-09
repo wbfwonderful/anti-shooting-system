@@ -22,6 +22,8 @@
 
 - 模型文件貌似上传不上来，如果 git push 卡住可以先把模型文件删掉
 
+- 如果上传图片，可以把图片放到 README.assets 文件夹下
+
 # 开始
 
 ## PyCharm 设置
@@ -32,25 +34,25 @@
 
 - file -> settings -> Project，右边选择 Python Interpreter
 
-  ![image-20230406200457094](README.assets\image-20230406200457094.png)
+  ![image-20230406200457094](README.assets/image-20230406200457094.png)
 
 - add interpreter ->  add local interpreter
 
-  ![image-20230406200548051](README.assets\image-20230406200548051.png)
+  ![image-20230406200548051](README.assets/image-20230406200548051.png)
 
 - 左边选择 conda environment，右边选择自己 anaconda 安装目录下 Scripts 目录中 conda.exe 文件，下面选择 using existing environment
 
-  ![image-20230406200823316](README.assets\image-20230406200823316.png)
+  ![image-20230406200823316](README.assets/image-20230406200823316.png)
 
 - 然后选择自己之前创建的虚拟环境（我这里是 Artistic）
 
-  ![image-20230406200919590](README.assets\image-20230406200919590.png)
+  ![image-20230406200919590](README.assets/image-20230406200919590.png)
 
 - 最后依次点击 ok，apply，ok
 
 - terminal 中出现虚拟环境的名字就设置成功了
 
-  ![image-20230406201021002](README.assets\image-20230406201021002.png)
+  ![image-20230406201021002](README.assets/image-20230406201021002.png)
 
 - 有爆红的包就 pip install 即可
 
