@@ -1,0 +1,83 @@
+/* CSS Document */
+OL LI {
+	MARGIN: 8px
+}
+#content {
+	FONT-SIZE: 12px; 
+	MARGIN: 0px auto; 
+	WIDTH: 100%; 
+}
+#tags {
+	HEIGHT: 23px;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+#tags LI {
+	BACKGROUND: url(../framework/images/tagleft.jpg) no-repeat left bottom;
+	FLOAT: left; 
+	MARGIN-RIGHT: 1px; 
+	LIST-STYLE-TYPE: none; 
+	HEIGHT: 23px
+}
+#tags LI A {
+	PADDING-RIGHT: 10px; 
+	PADDING-LEFT: 10px; 
+	BACKGROUND: url(../framework/images/tagright.jpg) no-repeat right bottom; 
+	FLOAT: left; 
+	PADDING-BOTTOM: 0px; 
+	COLOR: #999; 
+	LINE-HEIGHT: 23px; 
+	PADDING-TOP: 0px; 
+	HEIGHT: 23px; 
+	TEXT-DECORATION: none
+}
+#tags LI.emptyTag {
+	BACKGROUND: none transparent scroll repeat 0% 0%; 
+	WIDTH: 4px
+}
+#tags LI.selectTag {
+	BACKGROUND-POSITION: left top; 
+	MARGIN-BOTTOM: -2px; 
+	POSITION: relative; 
+	HEIGHT: 25px
+}
+#tags LI.selectTag A {
+	BACKGROUND-POSITION: right top; 
+	COLOR: #000; 
+	LINE-HEIGHT: 25px; 
+	HEIGHT: 25px
+}
+#tagContent {
+	BORDER: #CAD1D7 1px solid;
+	PADDING:1px;
+	BACKGROUND-COLOR: #fff;
+	height:100%;
+}
+#liback {
+	BORDER: #fff 0px solid;
+	PADDING:0px;
+	BACKGROUND-COLOR: #fff;
+	height:100%;
+	PADDING-LEFT: 100px; 
+}
+.tagContentMain {
+	DISPLAY: none;
+	COLOR: #474747;
+	HEIGHT: 250px;
+	padding: 10px;
+}
+.tagContent {
+	DISPLAY: none;
+	BACKGROUND: url(../framework/images/bg_1.jpg) repeat-x;
+	COLOR: #474747;
+	HEIGHT:100%;
+	padding: 10px;
+}
+#tagContent DIV.selectTag {
+	DISPLAY: block
+}
+
+

@@ -1,0 +1,496 @@
+/*****************************************************************
+    jspublic.js
+    2014-8-15
+    封装了项目中所用到的js公共方法  
+*****************************************************************/ 
+//批量设置事件
+function ZdSz(){  
+	var zdsznr = document.getElementById("ZdSzNr"); 
+	if(zdsznr.value == "") {
+		alert("请先指定要设置的内容!");
+		zdsznr.focus();
+		return false;
+	}
+	
+	var zdSzValue = document.getElementById("ZdSzValue"); 
+	if(zdSzValue.value == "") {
+		alert("请先指定要设置的内容!");
+		zdSzValue.focus();
+		return false;
+	}
+
+	var c_select=document.getElementsByName("C_Select");
+	var isSelect=false;	
+
+	//判断是否选定记录
+	for(var i=0;i<c_select.length;i++) {
+		if(c_select[i].checked==true){ 
+			isSelect=true;
+			break;
+		}
+	} 
+	
+	if(!isSelect) {
+		alert('指定设置无效，没有选择记录！');
+		return false;
+	}  
+	
+	//扩展数据类型
+	var patrn=/^0+\.*[0-9]*$/;
+	var type=zdsznr.value.split(":")[1];
+	
+	//临时解决导学时分类带了0造成在开课通知单中不能修改学时信息
+	if(type=="01" || type=="02" || type=="03" || type=="04" || type=="05"){
+		type=parseInt(type);
+	} 	
+		
+	var isnum=!patrn.exec(type);
+	if(!isnum){
+		var result=false;
+		if(type=='0'){
+			result=checkNumber(zdSzValue);	
+		}else if(type=='0.1'){
+			result=checkNumber(zdSzValue);	
+			if(zdSzValue.value<0 && result){
+				alert("必须为大于0的数字");
+				result=false;
+			}
+		}else if(type=='0.2'){
+			result=checkIntegerIsTun(zdSzValue);
+		} 
+	}
+	
+	if(!CheckCanDelete("设置<" + zdsznr.options[zdsznr.selectedIndex].text+">")) {
+		return false;
+	}
+		
+	//设置值		 
+	if(document.getElementById("ZdSzValueTemp").value==""){
+		document.getElementById("ZdSzValueTemp").value = zdSzValue.value;
+	} 
+	
+	document.getElementById("PlAction").value = "set";
+	document.getElementById("ZDSXkeydm").value = zdsznr.value;
+	document.getElementById("ZdSzCodeValue").value = zdSzValue.value;
+	
+	var zdnrText = zdsznr.value;
+	if(zdsznr.value!=null && zdsznr.value!=""){
+		var zdnrObj = zdsznr.value.split(":");
+		zdnrText = zdnrObj[0];
+	}
+	document.getElementById("ZdSzCode").value = zdnrText;
+	  
+	document.getElementById("Form1").action = "";  
+	
+	if(document.getElementById("userModifyUrl")!=null 
+			&& document.getElementById("userModifyUrl").value != "") {  
+		var modFieldName = document.getElementById("ZdSzNr").value.split(":")[0];
+		var userModFields = document.getElementById("userModifyUrl").value.split(",");
+		var strUrl = "";
+		for(var i=0;i<userModFields.length;i++) {
+			if(userModFields[i].split(":")[0] == modFieldName) {
+				strUrl = userModFields[i].split(":")[1];
+				break;
+			}
+		} 
+		
+		openProgress(); 
+		
+		document.getElementById("Form1").action=strUrl;
+		if(strUrl!=""){
+			document.getElementById("Form1").target="hideFrame";
+		}
+		document.getElementById("Form1").submit(); 
+		
+	}else{  
+		openProgress();
+		document.getElementById("Form1").submit();   
+	} 
+} 
+
+//批量删除事件
+function DeleteSelectedOper(){
+	var c_select=document.getElementsByName("C_Select");
+	var isSelect=false;	
+
+	//判断是否选定记录
+	for(var i=0;i<c_select.length;i++) {
+		if(c_select[i].checked==true){ 
+			isSelect=true;
+			break;
+		}
+	} 
+	
+	if(!isSelect){
+		alert("请选择要删除的记录！");
+		return false;
+	}
+	
+	if(!confirm("你确认要删除选中的记录？")) {
+		return false;
+	}
+	
+	$.messager.progress(); 
+	
+	document.getElementById("PlAction").value = "del"; 
+	document.getElementById("Form1").submit();  
+} 
+
+
+//切换修改字段
+/*function ChangeSzValue_New(){
+	var zdObj = document.getElementById("ZdSzNr");
+	var zdValObj = document.getElementById("ZdSzValue");
+	if(zdObj.value==""){
+		zdValObj.readOnly = true;
+		document.getElementById("cmdselect").style.display="none";
+	}else{
+	    //代码:类型:下拉选择SQL
+	    var dmbz = zdObj.value.split(":"); 
+	    
+	    //字典的设置值
+	    document.getElementById("ZdSzValue").value = "";
+		
+		//字典代码
+	    document.getElementById("ZdSzCode").value = dmbz[0];
+		
+	    //字典的显示内容
+	    document.getElementById("ZdSzCodeValue").value = ""; 
+	    // 如果有字典内容显示字典内容
+		if(dmbz.length>1){
+			document.getElementById("ZdSzValue").readOnly = true;
+			document.getElementById("cmdselect").style.display="inline";
+		}else {//不是字典			
+			document.getElementById("ZdSzValue").readOnly = false;
+			document.getElementById("cmdselect").style.display="none";
+		}
+	}
+	document.getElementById('ZdSzCodeValue').value = "";
+	document.getElementById('ZdSzValue').value = "";
+	document.getElementById('ZDSXkeydm').value = "";
+	document.getElementById("hiddenframe").style.display = "none";
+}*/
+
+
+//加载更新字段
+/*function changeUpdateField_New(obj) {
+	var update_field = obj.value.split(":")[0];
+	var selectField="";
+	var selectField_update="";
+	
+	if(selectFields != "") {
+		selectField = selectFields.split("#");
+	}
+	
+	if(selectField != undefined && selectField!=null && selectField!=""){
+		for(var i=0;i<selectField.length;i++) {
+			if(update_field == selectField[i].split(":")[0]) {
+				selectField_update = selectField[i];
+				break;
+			}
+		} 
+		
+		if(selectField_update!=null && selectField_update!="") { 
+			//通过DWR查询
+			if(selectField_update.split(":")[1] == 0) {
+				tn = selectField_update.split(":")[2];
+				ov = selectField_update.split(":")[3];
+				on = selectField_update.split(":")[4];
+				ow =  selectField_update.split(":")[5];
+				DWREngine.setAsync(false);
+				dwrMonitor.getforsj(tn,ov,on,ow,getDataResult_New);
+				
+			}else if(selectField_update.split(":")[1] == 1) {		//静态设置select 
+				var options = selectField_update.split(":")[2];   
+				var option = options.split("$");
+				var ops = "";
+				for(var j=0;j<option.length;j++) {
+					var optObj = option[j];
+					var valObj = optObj.split("|");  
+					ops = ops+"<option value='"+valObj[0]+"'>"+valObj[1]+"</option>"; 
+				} 
+				document.getElementById("ZdSzValue_text").innerHTML = "";
+				document.getElementById("ZdSzValue_select").innerHTML = "<select id=\"ZdSzValue\" name=\"ZdSzValue\" style=\"width:110px;\">"+ops+"</select>";
+				document.getElementById("ZdSzValue_select").style.display="inline";
+				document.getElementById("cmdselect").style.display = "none";
+			//	DWRUtil.addOptions(ZdSzValue,objectEval(ops));
+			}else if(selectField_update.split(":")[1] == 2) {		//外接JS方法
+				var jsMethod = "";
+				if(selectField_update.indexOf("$id") >= 0) {
+					jsMethod = selectField_update.split(":")[2].replace("$id","ZdSzValue").replace("$value","ZdSzValue_value");
+					document.getElementById("ZdSzValue_text").innerHTML = "<input type=\"hidden\" id=\"ZdSzValue\" name=\"ZdSzValue\"><input type=\"text\" id=\"ZdSzValue_value\" name=\"ZdSzValue_value\" class=\"mytext\" size=\"15\" >";
+					document.getElementById("ZdSzValue_value").readOnly = true;
+					document.getElementById("ZdSzValue").readOnly = true;
+				}else{
+					jsMethod = selectField_update.split(":")[2].replace("$value","ZdSzValue");
+					document.getElementById("ZdSzValue_text").innerHTML = "<input type=\"text\" id=\"ZdSzValue\" name=\"ZdSzValue\" class=\"mytext\" size=\"15\" >";
+					document.getElementById("ZdSzValue").readOnly = true;
+				}
+				document.getElementById("ZdSzValue_select").innerHTML = "";
+				
+				document.getElementById("ZdSzValue_text").style.display="inline";
+				document.getElementById("cmdselect").style.display="inline";
+				document.getElementById("cmdselect").onclick = new Function(jsMethod);
+				
+			}else if(selectField_update.split(":")[1] == 3) { 		//内接JS方法
+				var jsMethod = "";
+				if(selectField_update.indexOf("$id") >= 0) {
+					jsMethod = selectField_update.split(":")[2].replace("$id","ZdSzValue").replace("$value","ZdSzValue_value");
+					document.getElementById("ZdSzValue_text").innerHTML = "<input type=\"hidden\" id=\"ZdSzValue\" name=\"ZdSzValue\"><input type=\"text\" id=\"ZdSzValue_value\" name=\"ZdSzValue_value\" class=\"mytext\" size=\"15\" >";
+					document.getElementById("ZdSzValue_value").readOnly = true;
+					document.getElementById("ZdSzValue").readOnly = true;
+				}else{
+					jsMethod = selectField_update.split(":")[2].replace("$value","ZdSzValue");
+					document.getElementById("ZdSzValue_text").innerHTML = "<input type=\"text\" id=\"ZdSzValue\" name=\"ZdSzValue\" class=\"mytext\" size=\"15\" >";
+					//document.getElementById("ZdSzValue").readOnly = true;
+				}
+				document.getElementById("ZdSzValue_select").innerHTML = ""; 
+				document.getElementById("ZdSzValue_text").style.display="inline";
+				document.getElementById("cmdselect").style.display = "none";
+				document.getElementById("ZdSzValue").onclick = new Function(jsMethod);
+			}
+		}else{
+			document.getElementById("ZdSzValue_select").innerHTML = "";
+			document.getElementById("ZdSzValue_text").innerHTML = "<input type=\"text\" id=\"ZdSzValue\" name=\"ZdSzValue\" class=\"mytext\" size=\"15\" >";
+			document.getElementById("ZdSzValue_text").style.display="inline"; 
+			document.getElementById("cmdselect").style.display = "none";
+			if(obj.value == ""){
+				document.getElementById("ZdSzValue").readOnly = true;
+			}
+		}
+	}
+}
+
+function getDataResult_New(dataList) {
+	document.getElementById("ZdSzValue_text").innerHTML = "";
+	document.getElementById("ZdSzValue_select").innerHTML = "<select id=\"ZdSzValue\" name=\"ZdSzValue\" style=\"width:110px;\"></select>";
+	document.getElementById("ZdSzValue_select").style.display="inline";
+	document.getElementById("cmdselect").style.display = "none";
+	DWRUtil.addOptions("ZdSzValue",dataList,0,1);
+}*/
+
+
+//列表页面刷新
+function indexSx(){ 
+	try{
+		document.getElementById("PlAction").value = "";
+		document.getElementById("Form1").target="";
+		document.getElementById("Form1").action="";
+		document.getElementById("Form1").submit(); 
+	}catch(e){}
+}
+
+
+function openProgress(){
+	$.messager.progress({
+	    title: '正在操作',  
+	    text: '正在操作请稍候'
+	});
+	
+	//在弹出进度条时，禁用页面上的按钮
+	$.each($("input[type=button]"), function(i, ipt) {
+		$(ipt).attr("disabled",true);
+	});
+}
+
+function colseProgress(){
+	$.messager.progress('close');
+	
+	//在关闭进度条时，解除禁用
+	$.each($("input[type=button]"), function(i, ipt) {
+		$(ipt).attr("disabled",false);
+	});
+}
+
+
+//选择学生学号和姓名   
+function selectXsdyNew(_path,id,name,xb,bj,xnxqid,xs0101id,rxnf,xsjj,type,where){  
+		if(type == undefined){
+			type="0";
+		}
+		if(where == undefined){
+			where="";	
+		}  	
+	    var url = _path+"/common/queryxsxx.jsp?id="+id+"&name="+name+"&xb="+xb+"&bj="+bj+"&xs0101id="+xs0101id+"&rxnf="+rxnf+"&xsjj="+xsjj+"&type="+type+"&where="+xnxqid;     	
+	   	var rs = window.showModalDialog(url,window,"dialogHeight:400px; dialogWidth:600px"); 
+	   	return rs; 
+	}
+	
+//开课通知单类别
+function selectJx0404_kktzd_new(_path,id,name,type,where) {
+	if(type == undefined) type="0";
+	if(where == undefined) where="";
+   	var url = _path+"/common/jx0404_kktzd.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+	var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:750px");
+/*	if(rs!=""){
+		document.getElementById('tzdid').value=rs.id;
+		document.getElementById('tzd').value=rs.name;
+	}*/
+}
+   	
+//开课单位
+ function selectXx0301_kkdw_new(_path,id,name,type,where) {
+	if(type == undefined) type="0";
+	if(where == undefined) where="";
+  	var url = _path+"/common/xx0301_kkdw_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+  	var rs = window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+  	//if(rs!=""){
+	//	document.getElementById('kkxyid').value=rs.id;
+	//	document.getElementById('kkxy').value=rs.name;
+	//}
+}
+    
+  //上课单位
+ function selectXx0301_skdw_new(_path,id,name,type,where) {
+	if(type == undefined) type="0";
+	if(where == undefined) where="";
+  	var url = _path+"/common/xx0301_skdw_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+  	var rs = window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:700px");
+  	//if(rs!=""){
+	//	document.getElementById('skyx').value=rs.id;
+	//	document.getElementById('skyxmc').value=rs.name;
+	//}
+}
+ 
+ //------yuwei----
+ function selectZZDKCXZ_new(_path,id,name,type,where){
+ 	if(type == undefined) type="0";
+	if(where == undefined) where="";
+  	var url = _path+"/common/zzdkcxz_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+  	var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+  	//if(rs!=""){
+	//	document.getElementById('kcxz').value=rs.id;
+	//	document.getElementById('kcxzmc').value=rs.name;
+	//}
+}
+ 
+function selectZZDKCLB_new(_path,id,name,type,where){
+    if(type == undefined) type="0";
+	 if(where == undefined) where="";
+     var url = _path+"/common/zzdkclb_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+    var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+     //if(rs!=""){
+	//	document.getElementById('kcsx').value=rs.id;
+	//	document.getElementById('kcsxmc').value=rs.name;
+	//}
+    	
+}
+ 
+ function selectUser_new(_path,id,name,type,where) {
+	 if(type == undefined) type="0";
+	 if(where == undefined) where="";
+     var url = _path+"/common/user_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     var rs = window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:720px");
+     ///if(rs!=""){
+	//	document.getElementById('kczry').value=rs.id;
+	//	document.getElementById('kczrymc').value=rs.name;
+	//}
+}
+
+function selectXnxq01_new(_path,id,name,type,where,id,name) {
+ 	if(type == undefined) type="0";
+ 	if(where == undefined) where="";
+   	var url = _path+"/common/xnxq01_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+    var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+  
+   	//if(rs!=""){
+	//	document.getElementById(id).value=rs.id;
+	//	document.getElementById(name).value=rs.name;
+	//}
+}
+
+function selectJcsms_new(_path,id,name,where) {
+	if(where == undefined) where="";
+     var url = _path+"/jiaowu/jcgl/selectJcsmO.jsp?id="+id+"&name="+name+"&where="+where;
+     var rs = window.showModalDialog(url,window,"dialogHeight:700px; dialogWidth:700px");
+     //if(rs){
+     //	document.getElementById('ZdSzValue').value=rs.name;
+	//	document.getElementById('ZdSzCode1').value=rs.id;
+    // }
+}	
+
+//_path:路径 ，id：选择值的ID ，Name：选择值的文本内容,type:0为多选 1为单选 ，where：查询条件
+function selectKcxx_new(_path,id,name,type,where) {
+ 	if(type == undefined){
+ 		 type="0";
+	}
+ 	if(where == undefined){
+ 	 where="";
+ 	}
+    var url = _path+"/common/kcxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+    var rs =  window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+  //  if(rs){
+  //  	document.getElementById('kcname').value=rs.name;
+//		document.getElementById('kcid').value=rs.id;
+  //  }
+}
+
+ function selectjx0404pc_new(_path,id,name,type,xnxq01id,where){
+ 	if(type == undefined){
+ 		type="0";
+	}
+ 	if(where == undefined){
+ 	    where="";
+ 	}
+    var url = _path+"/common/jx0404_selectpc.jsp?id="+id+"&name="+name+"&type="+type+"&xnxq01id="+xnxq01id+"&where="+where;
+    var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:720px");
+   //if(rs){
+    //	document.getElementById('kktzdids').value=rs.name;
+	//	document.getElementById('kktzdid').value=rs.id;
+    //}  	
+ }
+ 
+ function selectTeacherspc_new(_path,id,name,type,where) {
+ 	if(type == undefined){
+ 		type="0";
+	}
+ 	if(where == undefined){
+ 	    where="";
+ 	}
+    var url = _path+"/common/teacher_selectspc.jsp?id="+id+"&name="+name+"&type="+type+"&where=";
+    var rs = window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:800px");
+    //if(rs){
+    //	document.getElementById('name').value=rs.name;
+	//	document.getElementById('jg0101id').value=rs.id;
+   // }
+ }
+ 
+ function selectTeacherspjsjzr(_path,id,name,type,where) {
+ 	if(type == undefined){
+ 		type="0";
+	}
+ 	if(where == undefined){
+ 	    where="";
+ 	}
+  	var url = _path+"/common/teacher_selectspj.jsp?id="+id+"&name="+name+"&type="+type+"&where=";
+  	var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+  	//if(rs){
+  	//	document.getElementById('username').value=rs.name;
+	//	document.getElementById('userid').value=rs.id;
+  	//}
+ }
+ 
+   //绿色通道学生
+ function selectStudentlstd_new(_path,id,name,type,where){
+ 	if(type == undefined) type="0";
+ 	if(where == undefined) where="";
+  	var url = _path+"/common/user_student_all_lstd.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+  	var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px");
+  	//if(rs){
+  	//	document.getElementById('name').value=rs.name;
+	//	document.getElementById('id').value=rs.id;
+  	//}
+ }
+ 
+//所有学生
+ function selectStudent_new(_path,id,name,type,where){
+ 	if(type == undefined) type="0";
+    if(where == undefined) where="";
+  	var url = _path+"/common/user_student_all.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+  	var rs = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px");
+  	return rs;
+ }
+ 
+function checkNullOrUndefined(objVal) {
+	return objVal == undefined || objVal == "" ? true : false;
+} 

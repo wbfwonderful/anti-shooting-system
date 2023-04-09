@@ -1,0 +1,1573 @@
+
+     var path = "/newjw";
+
+    //寻找方法并以此方法提交
+    //mhd: 传过来要提交的方法
+    function findMethod(mhd){
+      document.all.method.value=mhd;
+      document.forms[0].submit();
+    }
+
+	function getIds(colId) {
+		var col = document.all(colId);
+		var ids = new Array();
+		var j = 0;
+		if(col!=null){
+          if(isNaN(col.length)){
+             if(document.all(colId).checked){
+                ids[0] = document.all(colId).value;
+             }
+          }else{
+			 for(var i=0; i<col.length; i ++){
+              if(col[i].checked){
+                ids[j] = col[i].value;
+				j ++;
+              }
+            }
+		  }
+        }
+		return ids;
+	}
+
+    //处理删除，colID:被选中的要删除的主键， mhd:删除时要提交处理的方法
+    function processDel(colID,mhd){
+        var col = document.forms(0).elements(colID);
+        var j = 0;
+        if(col!=null){
+          if(isNaN(col.length)){
+             if(document.all(colID).checked){
+                j = 1;
+              }
+          }
+        }
+        if(col!=null){
+            for(var i=0; i<col.length; i ++){
+              if(col[i].checked){
+                j ++;
+              }
+            }
+        }
+        if(j == 0){
+           alert("您没有选择要删除的记录！");
+           return;
+        }
+        else{
+          if(confirm("您有"+j+"条记录被选中，如果删除，与其相关连的所有信息都将被删除！确定要删除这些记录吗？")){
+             document.forms(0).method.value=mhd;
+             //return true;
+             document.forms[0].submit();
+          }
+          else{
+             return;
+          }
+        }
+    }
+
+    //选中所有的复选框
+    function selectAll(call,cid){
+        var old = document.all(call).checked
+        var col = document.all(cid);
+        if(col!=null){
+          if(col.length>=2){
+            for(var i=0; i<col.length; i ++){
+			  if(col[i].disabled == false)
+				col[i].checked = old;
+            }
+          }
+          else{
+			 if(col.disabled == false)
+				 col.checked = old;
+          }
+        }
+    }
+
+	function goPage(object){
+		for(var i=0;i<prop_ts.length;i++) {
+			if(prop_ts[i].objName==pageId) {
+				prop_ts[i].goPage(object);
+			}
+		}
+	}
+
+	function pageOperate2(pageoperate,courrentpage) {
+		document.all("pageOperate").value = pageoperate;
+        document.all("courrentPage").value = courrentpage;
+        document.forms(0).submit();
+	}
+	function setThePageCount(countPer) {
+        var countPage = document.all(countPer).value;
+		document.all("countPPage").value = countPage;
+        document.forms(0).submit();
+    }
+
+	function setPageCount(pageCount){
+		for(var i=0;i<prop_ts.length;i++) {
+			if(prop_ts[i].objName==pageId) {
+				prop_ts[i].setPageCount(pageCount);
+			}
+		}
+	}
+
+    //核查输入的页码
+    function checkPage(actionForm){
+        if(document.forms(actionForm).page.value == ""){
+            alert("页码必须输入!");
+            return false;
+        }
+        if(isNaN(document.forms(actionForm).page.value)){
+            alert("必须输入数字!");
+            return false;
+        }
+        else if(document.forms(actionForm).page.value.indexOf(".") >= 0){
+            alert("必须输入整数!");
+            return false;
+        }
+        document.forms(actionForm).pageOperate.value = "gotopage";
+        document.forms(actionForm).courrentPage.value = document.forms(actionForm).page.value;
+        return true;
+    }
+
+    //核查输入字符串是否符合要求，只能输入a-z,A-Z,_,0-9
+    function checkStr(strObj,errMsg){
+       var regObj = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_" ;
+       var value = document.all(strObj).value;
+	   if(value == ""){
+           return true;
+        }
+       for(var i=0; i<value.length; i++){
+         tempChar= value.substring(i,i+1);
+         if(regObj.indexOf(tempChar) == -1){
+           alert(errMsg);
+           document.all(strObj).focus();
+           return false;
+         }
+       }
+       return true;
+    }
+
+	function checkStr2(value) {
+       var regObj = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-" ;
+	   if(value == ""){
+           return true;
+        }
+		for(var i=0; i<value.length; i++){
+         tempChar= value.substring(i,i+1);
+         if(regObj.indexOf(tempChar) == -1){
+           return false;
+         }
+       }
+	   return true;
+	}
+
+    //核查只能输入数字
+    function checkNum(strObj,errMsg){
+       var regObj = "0123456789";
+       var value = document.all(strObj).value;
+       if(value == ""){
+           return true;
+        }
+       for(var i=0; i<value.length; i++){
+         tempChar= value.substring(i,i+1);
+         if(regObj.indexOf(tempChar) == -1){
+           alert(errMsg);
+           return false;
+         }
+       }
+       return true;
+    }
+
+    //核查是否为email
+    function checkEmail(strObj,errMsg){
+       var value = document.all(strObj).value;
+	   if(value == ""){
+           return true;
+        }
+       if(value.indexOf("@") == -1 || value.indexOf(".") == -1){
+          alert(errMsg);
+          document.all(strObj).focus();
+          return false;
+       }
+       return true;
+    }
+
+    function CheckLength(textarea,length,msg) {
+	intLength=(Trim(textarea.value)).length;
+     var str = textarea.value;
+     if (intLength>length) {
+       alert(msg);
+       textarea.focus();
+       return false;
+     }
+     return true;
+   }
+
+function CheckLength2(textarea,length,msg) {
+     intLength=(Trim(textarea.value)).length;
+     var str = textarea.value;
+     if (intLength>length) {
+       alert(msg);
+       textarea.focus();
+       return false;
+     }
+     return true;
+   }
+
+   // 去除首尾空格
+function Trim(str) {
+
+	blnbeginflag=true
+	blnendflag=true
+
+	for (i=0;i<str.length;i++) {
+			if ((str.indexOf(" ")==0) && blnbeginflag){
+			    intlen=str.length
+			    str=str.substring(1,intlen)
+			    i--
+			}else{
+			    blnbeginflag=false
+			}
+
+			if ((str.lastIndexOf(" ")==(str.length-1)) && blnendflag) {
+			    str=str.substring(0,str.length-1)
+			}else{
+			    blnendflag=false
+			}
+         }
+
+         return str
+   }
+   //用户ajax
+   var xmlHttp;
+   function createXMLHttpRequest() {
+         if(window.ActiveXObject){
+             xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+         }
+         else if(window.XMLHttpRequest){
+             xmlHttp = new XMLHttpRequest();
+         }
+     }
+
+// 验证是否 日期
+function isDate( strValue )
+{
+
+	// 日期格式必须是 2001-10-1/2001-1-10 或者为空
+	if( isEmpty( strValue ) ) return true;
+
+	if( !checkExp( /^\d{4}-[01]?\d-[0-3]?\d$/g, strValue ) ) return false;
+	// 或者 /^\d{4}-[1-12]-[1-31]\d$/
+
+	var arr = strValue.split( "-" );
+	var year = arr[0];
+	var month = arr[1];
+	var day = arr[2];
+
+	// 1 <= 月份 <= 12，1 <= 日期 <= 31
+	if( !( ( 1<= month ) && ( 12 >= month ) && ( 31 >= day ) && ( 1 <= day ) ) ){
+           return false;
+        }
+
+	// 润年检查
+	if( !( ( year % 4 ) == 0 ) && ( month == 2) && ( day == 29 ) ){
+        return false;
+        }
+
+	// 7月以前的双月每月不超过30天
+	if( ( month <= 7 ) && ( ( month % 2 ) == 0 ) && ( day >= 31 ) ){
+        return false;
+        }
+
+	// 8月以后的单月每月不超过30天
+	if( ( month >= 8) && ( ( month % 2 ) == 1) && ( day >= 31 ) ){
+        return false;
+        }
+
+	// 2月最多29天
+	if( ( month == 2) && ( day >=30 ) ){
+        return false;
+        }
+
+	return true;
+}
+
+// 验证是否 货币
+function isMoney( strValue )
+{
+	// 货币必须是 -12,345,678.9 等格式 或者为空
+	if( isEmpty( strValue ) ) return true;
+
+	return checkExp( /^[+-]?\d+(,\d{3})*(\.\d+)?$/g, strValue );
+}
+
+function isMoney1( strValue )
+{
+	// 货币必须是 1111.43等格式 或者为空
+	if( isEmpty( strValue ) ) return true;
+
+	return checkExp( /^[+-]?\d{1,6}\.\d{2}$/g, strValue );
+}
+
+// 验证是否 Email
+function isEmail( strValue )
+{
+	// Email 必须是 x@a.b.c.d 等格式 或者为空
+	if( isEmpty( strValue ) ) return true;
+
+	var pattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+	return checkExp( pattern, strValue );
+
+}
+
+// 验证是否 为空
+function isEmpty( strValue )
+{
+	if( strValue == "" )
+		return true;
+	else
+		return false;
+}
+// 使用正则表达式，检测 s 是否满足模式 re
+function checkExp( re, s )
+{
+	return re.test( s );
+}
+
+// 验证是否 整数
+function isInt( strValue )
+{
+	// 数字必须是 0123456789 或者为空
+
+	return checkExp( /^\d*$/g, strValue );
+}
+
+// 验证是否 数字
+function isNumeric( strValue )
+{
+	// 数字必须是 0123456789 或者为空
+
+	return !isNaN(strValue);
+}
+
+// 验证是否 邮政编码
+function isPostalCode( strValue )
+{
+	// 邮政编码必须是6位数字
+	return checkExp( /(^$)|(^\d{6}$)/gi, strValue )
+}
+
+// 验证是否 电话
+function isPhone( strValue )
+{
+	// 普通电话	(0755)4477377-3301/(86755)6645798-665
+	// Call 机	95952-351
+	// 手机		130/131/135/136/137/138/13912345678
+	// 或者为空
+	if( isEmpty( strValue ) ) return true;
+
+	return checkExp( /(^(\(\d{3,5}\)|\d{3,5}|\d{3,5}-)\d{3,12}(-\d{0,8})?$)|(^\d+-\d+$)|(^(130|131|132|133|134|135|136|137|138|139|159|158|157|151|153|152)\d{8}$)/g, strValue );
+}
+
+function checkRadioEmpty(prop) {
+		var radio_len = document.all(prop).length;
+		var result = false;
+		if(radio_len >= 2) {
+			for(var i=0;i<radio_len;i++) {
+				 if(document.all(prop)[i].checked == true){
+					  result = true;
+				 }
+			}
+		}else{
+			if(document.all(prop).checked == true) {
+				result = true;
+			}
+		}
+		return result;
+	}
+
+
+//////////////////////////////////////
+var obj_nan = new Array();
+var type_nan = new Array();
+var msg_nan = new Array();
+var i_is = 0;
+var check_type_temp = "";
+var check_mess_temp = "";
+
+function checkTextType(object,type,mess) {
+try  
+  { if(isValidate){return true;}
+}catch(err)  
+{}
+   obj_nan[i_is] = object;
+   type_nan[i_is] = type;
+   msg_nan[i_is] = mess;
+   i_is ++;
+   check_type_temp = type;
+   check_mess_temp = mess;
+  return checkBlurType(object);
+}
+
+var obj_pa = new Array();
+var patt_pa = new Array();
+var patt_value = new Array();
+var pamess_pa = new Array();
+var i_pa = 0;
+function checkPattern(object,patternType,pattern_value,mess) {
+	
+	obj_pa[i_pa] = object;
+	patt_pa[i_pa] = patternType;
+	patt_value[i_pa] = pattern_value;
+	pamess_pa[i_pa] = mess;
+	i_pa ++;
+}
+
+function checkBlurType(object) {
+	var strValue = object.value;
+	var result=true;
+	switch( check_type_temp.toLowerCase()) {
+			//必须为整数
+			case "int" :
+				result = isInt( strValue );
+				if(!result) {
+					alert(check_mess_temp+"必须为整数!");
+					object.focus();
+					return false;
+				}
+				break;
+			//必须为数字，包括小数
+			case "num" :
+				result = isNumeric( strValue );
+				if(!result) {
+					alert(check_mess_temp+"必须为数字!");
+					object.focus();
+					return false;
+				}
+				break;
+			//书写字符串：数字、字符或下划线
+			case "str" :
+				result = checkStr2( strValue );
+				if(!result) {
+					alert(check_mess_temp+"必须为数字、字符、下划线或短横线!");
+					object.focus();
+					return false;
+				}
+				break;
+			//日期格式
+			case "date" :
+				result = isDate( strValue );
+				if(!result) {
+					alert(check_mess_temp+"格式书写错误!");
+					object.focus();
+					return false;
+				}
+				break;
+			//邮件格式
+			case "email" :
+				result = isEmail( strValue );
+				if(!result) {
+					alert(check_mess_temp+"格式书写错误!");
+					object.focus();
+					return false;
+				}
+				break;
+			//钱格式
+			case "money" :
+				result = isMoney( strValue );
+				if(!result) {
+					alert(check_mess_temp+"书写错误!");
+					object.focus();
+					return false;
+				}
+				break;
+			//邮政编码
+			case "code" :
+				result = isPostalCode( strValue );
+				if(!result) {
+					alert(check_mess_temp+"书写错误!");
+					object.focus();
+					return false;
+				}
+				break;
+			//电话格式
+			case "isphone" :
+				result = isPhone( strValue );
+				if(!result) {
+					alert(check_mess_temp+"书写错误!");
+					object.focus();
+					return false;
+				}
+				break;
+		}
+
+		if(check_type_temp.indexOf("num$") >= 0) {
+			var max = check_type_temp.split("$")[1];
+			result = isNumeric( strValue );
+			if(!result) {
+				alert(check_mess_temp+"必须为数字!");
+				object.focus();
+				object.value='';
+				return false;
+			}
+			if(Number(strValue) >= Number(max)) {
+				alert(check_mess_temp+"必需小于"+max);
+				object.focus();
+				object.value='';
+				return false;
+			}
+		}
+		if(check_type_temp.indexOf("int$") >= 0) {
+            var max = check_type_temp.split("$")[1];
+            result = isInt( strValue );
+            if(!result) {
+                alert(check_mess_temp+"必须为正整数!");
+                object.focus();
+                object.value='';
+                return false;
+            }
+            if(Number(strValue) >= Number(max)) {
+                alert(check_mess_temp+"必需小于"+max);
+                object.focus();
+                object.value='';
+                return false;
+            }
+		}
+
+
+		
+		return result;
+}
+
+function checkType() {
+    for(var j=0;j<obj_nan.length;j++) {
+		var strType = type_nan[j];
+		if(strType == "radioempty") {
+			result = checkRadioEmpty( obj_nan[j] );
+				if(!result) {
+					alert(msg_nan[j]+"没有选择!");
+					return false;
+				}
+		}
+		var strValue = obj_nan[j].value;
+		var result=true;
+
+		switch( strType.toLowerCase()) {
+			//不能为空
+			case "empty" :
+				result = isEmpty( Trim(strValue) );
+				if(result) {
+					alert(msg_nan[j]+"不能为空!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//必须为整数
+			case "int" :
+				result = isInt( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"必须为整数!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//必须为数字，包括小数
+			case "num" :
+				result = isNumeric( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"必须为数字!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//书写字符串：数字、字符或下划线
+			case "str" :
+				result = checkStr2( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"必须为数字、字符、下划线或短横线!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//日期格式
+			case "date" :
+				result = isDate( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"格式书写错误!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//邮件格式
+			case "email" :
+				result = isEmail( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"格式书写错误!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//钱格式
+			case "money" :
+				result = isMoney( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"书写错误!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//邮政编码
+			case "code" :
+				result = isPostalCode( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"书写错误!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+			//电话格式
+			case "isphone" :
+				result = isPhone( strValue );
+				if(!result) {
+					alert(msg_nan[j]+"书写错误!");
+					obj_nan[j].focus();
+					return false;
+				}
+				break;
+		}
+		
+		if(strType.indexOf("num$") >= 0) {
+			var max = strType.split("$")[1];
+			result = isNumeric( strValue );
+			if(!result) {
+				alert(msg_nan[j]+"必须为数字!");
+				obj_nan[j].focus();
+				return false;
+			}
+			if(Number(strValue) >= Number(max)) {
+				alert(msg_nan[j]+"必需小于"+max);
+				obj_nan[j].focus();
+				return false;
+			}
+		}
+	}
+
+	for(var k=0;k<obj_pa.length;k++) {
+		var paType = patt_pa[k];
+		var paValue = patt_value[k];
+		var objValue = obj_pa[k].value;
+
+		switch(paType.toLowerCase()) {
+			//书写定义长度
+			case "length" :
+				var paValue_s = paValue.split(",")[0];
+				var paValue_e = paValue.split(",")[1];
+				if(objValue == "") {
+					return true;
+				}
+				if(objValue.length<paValue_s || objValue.length>paValue_e) {
+					if(paValue_s==-1) {
+						alert(pamess_pa[k]+"长度不能超过"+paValue_e+"个字！");
+					}
+					if(paValue_e==-1) {
+						alert(pamess_pa[k]+"长度不能少于"+paValue_s+"个字！");
+					}
+					if(paValue_s>=0&&paValue_e>=0) {
+						alert(pamess_pa[k]+"长度必须在"+paValue_s+"到"+paValue_e+"之间！");
+					}
+					obj_pa[k].focus();
+					return false;
+				}
+				break;
+			//正则表达式
+			case "pattern" :
+				if(!checkExp(paValue,objValue)) {
+					alert(pamess_pa[k]);
+					obj_pa[k].focus();
+					return false;
+				}
+				break;
+		}
+	}
+	return true;
+	}
+	
+	function selectZcAndZxs(_path,id,name,isBgz,xs,type,where) {
+	    var checkBox = document.getElementById(id.substring(2,id.length));
+	    if(checkBox.checked){
+	    	if(type == undefined) type="0";
+     		var url = _path+"/kkglAction.do?method=toSelectZcAndZxs&id="+id+"&name="+name+"&isBgz="+isBgz+"&xs="+xs+"&jx0404id="+type+"&xnxq01id="+where;
+     		window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:1000px");
+	    }else{
+	    	alert('本安排不排课，不可以进行此操作！');
+	    }
+	 	
+    }
+	
+	//_path:路径 ，id：选择值的ID ，Name：选择值的文本内容,type:0为多选 1为单选 ，where：查询条件
+	function selectKcxx(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kcxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+    }
+    
+    //_path:路径 ，id：选择值的ID ，Name：选择值的文本内容,type:0为多选 1为单选 ，where：查询条件
+	function selectKcxxNew(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kcxxNew_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:580px; dialogWidth:750px");
+    }
+    function selectKcxxNew2(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kcxxNew_selectbypyfa.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:580px; dialogWidth:750px");
+    }
+     //_path:路径 ，id：选择值的ID ，Name：选择值的文本内容,type:0为多选 1为单选 ，where：查询条件
+	function selectKcxxNewaddkch(_path,id,name,kch,type,where) { 
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+	 	alert("2131");
+     	var url = _path+"/common/kcxxNew_select.jsp?id="+id+"&name="+name+"&kch="+kch+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:580px; dialogWidth:750px");
+    }
+    
+	//_path:路径 ，id：选择值的ID ，Name：选择值的文本内容,type:0为多选 1为单选 ，where：查询条件
+	function selectKcxx_Yx(_path,id,name,yx,kcsx,zxs,kcbh,xf,khfs,kslb,kcxzm,szkcfl,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kcxx_yx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where+"&yx="+yx+"&kcsx="+kcsx+"&zxs="+zxs+"&kcbh="+kcbh+"&xf="+xf+"&khfs="+khfs+"&kslb="+kslb+"&kcxzm="+kcxzm+"&szkcfl="+szkcfl;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }    
+    	//_path:路径 ，id：选择值的ID ，Name：选择值的文本内容,type:0为多选 1为单选 ，where：查询条件
+	function selectKcxx_Yxcx(_path,id,name,kw0406id,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kcxx_cxkc_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where+"&kw0406id="+kw0406id;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }   
+
+	//选择课程名称编号性质
+	function selectKcxx_Mc_Bh_Xz(_path,id,name, kch, kcxz, xs, xf, type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kcxx_bh_xz_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where+"&kch="+kch+"&kcxz="+kcxz+"&xs="+xs+"&xf="+xf;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    
+    //选择实验项目
+    //trId = 弹出界面的tr的id
+	function selectSyXmxx(_path,id,name,trId,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/syxm_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where+"&trId="+trId;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    
+    
+    //开课管理的选择多教师
+    function selectMultiJg0101s(_path,id,name,type,where, dwh) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+	 	if(dwh == undefined) dwh="";
+     	var url = _path+"/common/multi_jg0101s_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where+"&dwh="+dwh;
+     	window.showModalDialog(url,window,"dialogHeight:320px; dialogWidth:380px");
+    }
+    function selectJxgnq(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jxgnq_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+    }    
+    
+    function selectJx0601(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx0601_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:980px");
+    }    
+    //素质课选择
+	function selectSzKc(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/szkcxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:780px");
+    }
+    //创新创业课选择
+	function selectCxKc(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/cxkcxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:780px");
+    }    
+    function selectDwxx(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/dwxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectPkjs(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/user_Jspk.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:850px");
+    }
+    function selectUser(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/user_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:720px");
+    }
+     function selectUserkc(_path,id,name,dwid,dwmc,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/user_selectkc.jsp?id="+id+"&name="+name+"&dwid="+dwid+"&dwmc="+dwmc+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:700px; dialogWidth:1000px");
+    }
+    //带权限控制选择用户
+      function selectUserkcQx(_path,id,name,dwid,dwmc,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/user_selectkc_qx.jsp?id="+id+"&name="+name+"&dwid="+dwid+"&dwmc="+dwmc+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:700px; dialogWidth:1000px");
+    }
+    //所有学生
+    function selectStudent(_path,id,name,type,where){
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/user_student_all.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px");
+    }
+     //绿色通道学生
+    function selectStudentlstd(_path,id,name,type,where){
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/user_student_all_lstd.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px");
+    }
+    function selectZyxx(_path,id,name,type,where) { 
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/zyxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:890px");
+    }
+    function selectZyxxs(_path,id,name,pid,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/zyxx_select.jsp?id="+id+"&name="+name+"&pid="+pid+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:750px");
+    }
+    function selectRole(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/role_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:650px");
+    }
+    
+    function selectJx02dg(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx02dg_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    
+    function selectJg0101(_path,id,name,type,where) { 
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jg0101_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:800px");
+    }   
+    function selectjx02sy(_path,id,name,type,where) { 
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/selectJx02Three.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:800px");
+    }
+    function selectJg0101s(_path,id,name,type,where,afterJs,initWhereStr) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+	 	if(afterJs == undefined) afterJs="";
+     	var url = _path+"/common/jg0101_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where+"&afterJs="+afterJs+"&initWhereStr="+initWhereStr;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:780px");
+    }
+    function selectKczkc(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kczkc_select.jsp?id="+id+"&name="+name+"&type="+type+"&"+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:800px");
+    }    
+    function selectXx0103(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0103_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:730px");
+    }
+     function selectXx0103s(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0103_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:800px");
+    }
+    
+    function selectJx01nd(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx01nd_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:450px; dialogWidth:680px");
+    }
+    function selectJx01(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx01_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:450px; dialogWidth:680px");
+    }
+    function selectXs(_path,id,name,xb,bj,xnxqid,xs0101id,rxnf,xsjj,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/student_select.jsp?id="+id+"&name="+name+"&xb="+xb+"&bj="+bj+"&xs0101id="+xs0101id+"&rxnf="+rxnf+"&xsjj="+xsjj+"&type="+type+"&where="+xnxqid;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectXsdy(_path,id,name,xb,bj,xnxqid,xs0101id,rxnf,xsjj,type,where) {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";	 	
+     	//var url = _path+"/common/student_selectdy.jsp?id="+id+"&name="+name+"&xb="+xb+"&bj="+bj+"&xs0101id="+xs0101id+"&rxnf="+rxnf+"&xsjj="+xsjj+"&type="+type+"&where="+xnxqid;     	
+     	var url = _path+"/common/queryxsxx.jsp?id="+id+"&name="+name+"&xb="+xb+"&bj="+bj+"&xs0101id="+xs0101id+"&rxnf="+rxnf+"&xsjj="+xsjj+"&type="+type+"&where="+xnxqid;     	
+     	window.showModalDialog(url,window,"dialogHeight:400px; dialogWidth:600px");
+    }
+
+    function selectXsbd(_path,id,name,xb,bj,xnxqid,xs0101id,rxnf,xsjj,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/studentbd_select.jsp?id="+id+"&name="+name+"&xb="+xb+"&bj="+bj+"&xs0101id="+xs0101id+"&rxnf="+rxnf+"&xsjj="+xsjj+"&type="+type+"&where="+xnxqid;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+     function selectKwcc(_path,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kwccmc.jsp?name="+name+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectKwcchz(_path,param,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kwccmc.jsp?param="+param+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:780px");
+    }
+    function selectJs(_path,id,name,kszws,jsid,gnqid,yxid,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/js_select.jsp?id="+id+"&name="+name+"&kszws="+kszws+"&jsid="+jsid+"&gnqid="+gnqid+"&yxid="+yxid+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectJss(_path,id,name,kszws,jsid,gnqid,yxid,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jss_select.jsp?id="+id+"&name="+name+"&kszws="+kszws+"&jsid="+jsid+"&gnqid="+gnqid+"&yxid="+yxid+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+     function selectTeacher(_path,id,name,idkey,yxid,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_select.jsp?id="+id+"&name="+name+"&idkey="+idkey+"&yxid="+yxid+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectTeacherhz(_path,id,name,idkey,kw0401id,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_select.jsp?id="+id+"&name="+name+"&idkey="+idkey+"&kw0401id="+kw0401id+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+     function selectTeachers(_path,id,name,idkey,yxid,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_selects.jsp?id="+id+"&name="+name+"&idkey="+idkey+"&yxid="+yxid+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectTeacherspc(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_selectspc.jsp?id="+id+"&name="+name+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:800px");
+    }
+    function publicSelectTeachers(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/public_select_teachers.jsp?id="+id+"&name="+name+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function publicSelectUserTeachers(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/public_select_user_ts.jsp?id="+id+"&name="+name+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectTeacherspcs(_path,id,name,pid,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_selectspc.jsp?id="+id+"&name="+name+"&pid="+pid+"&type="+type+"&where=";
+     	var newwin = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+     	//alert(newwin);
+     	//if (newwin != null && newwin == "ok"){
+	    	creating.style.visibility='visible';
+			window.Form1.PlAction.value="";
+	    	window.Form1.submit();
+	    	document.getElementById('alldiv').disabled = true;
+		//}
+    }
+    function selectPj08pcs(_path,id,name,pj05id,pj0502id,pj0503id,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/pj08_selectspc.jsp?id="+id+"&name="+name+"&pj05id="+pj05id+"&pj0502id="+pj0502id+"&pj0503id="+pj0503id+"&type="+type+"&where=";
+     	var newwin = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+     	//alert(newwin);
+     	//if (newwin != null && newwin == "ok"){
+	    	creating.style.visibility='visible';
+			window.Form1.PlAction.value="";
+	    	window.Form1.submit();
+	    	document.getElementById('alldiv').disabled = true;
+		//}
+    }
+	function selectPj2203pcs(_path,id,name,pj22id,pj2201id,pj2202id,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/pj2203_selectspc.jsp?id="+id+"&name="+name+"&pj22id="+pj22id+"&pj2201id="+pj2201id+"&pj2202id="+pj2202id+"&type="+type+"&where=";
+     	var newwin = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+     	//alert(newwin);
+     	//if (newwin != null && newwin == "ok"){
+	    	creating.style.visibility='visible';
+			window.Form1.PlAction.value="";
+	    	window.Form1.submit();
+	    	document.getElementById('alldiv').disabled = true;
+		//}
+    }
+    function selectTeacherspcmxjs(_path,id,name,pj05id,pj02id,pj08id,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_selectspcmx.jsp?id="+id+"&name="+name+"&pj05id="+pj05id+"&pj02id="+pj02id+"&pj08id="+pj08id+"&type="+type+"&where=";
+     	var newwin = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+     	if (newwin != null && newwin == "ok"){
+	    	creating.style.visibility='visible';
+			window.Form1.PlAction.value="";
+	    	window.Form1.submit();
+	    	document.getElementById('alldiv').disabled = true;
+	    	}
+    }
+    function selectStudentspcmxjs(_path,id,name,pj05id,pj02id,pj08id,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/student_selectpcmx.jsp?id="+id+"&name="+name+"&pj05id="+pj05id+"&pj02id="+pj02id+"&pj08id="+pj08id+"&type="+type+"&where=";
+     	var newwin = window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+	    	if (newwin != null && newwin == "ok"){
+	    	creating.style.visibility='visible';
+			window.Form1.PlAction.value="";
+	    	window.Form1.submit();
+	    	document.getElementById('alldiv').disabled = true;
+		 }
+    }
+    function selectTeacherspjsjzr(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/teacher_selectspj.jsp?id="+id+"&name="+name+"&type="+type+"&where=";
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+   function selectXx0301(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0301_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:690px");
+    }
+    function selectXnxq01(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xnxq01_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    }
+    function selectXx04(_path,id,name,type,where)
+    {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx04_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px");
+    	
+    }
+    //----zhangbo----
+  	function selectjx0404Cl(_path,id,name,type,xnxq01id,where) //选课处理。选择范围内的课程
+    { 
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx0404_kccl.jsp?id="+id+"&name="+name+"&zzdxklbnameid="+type+"&xnxq="+xnxq01id;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:680px");
+    	
+    }
+    
+    function newselectXx0301(_path,id,name,type,where){
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/newxx0301_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:690px");
+    }    
+    function newselectJx01nd(_path,id,name,type,where){
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+	 	var url = _path+"/common/newJx01nd_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+	 	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:680px");
+    }
+    function newselectZyxx(_path,id,name,type,where){ 
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+	 	var url = _path+"/common/newZyxx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+	 	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px");
+    }
+    function newselectXx04(_path,id,name,type,where){ 
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+	 	var url = _path+"/common/newXx04_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+	 	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:800px"); 
+    }
+    
+    //------yuwei----
+    function selectZZDKCXZ(_path,id,name,type,where)
+    {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/zzdkcxz_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    	
+    }
+    function selectZc(_path,id,name,type,where)
+    {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/zc_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:780px");
+    	
+    }
+   function selectZZDKCLB(_path,id,name,type,where)
+    {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/zzdkclb_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:700px");
+    	
+    }
+  function selectjx0404(_path,id,name,type,xnxq01id,where)
+    {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx0404_select.jsp?id="+id+"&name="+name+"&type="+type+"&xnxq01id="+xnxq01id+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:750px");
+    	
+    }
+    function selectjx0404pc(_path,id,name,type,xnxq01id,where)
+    {
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx0404_selectpc.jsp?id="+id+"&name="+name+"&type="+type+"&xnxq01id="+xnxq01id+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:720px");
+    	
+    }
+    
+    //开课单位
+    function selectXx0301_kkdw(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0301_kkdw_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+    }
+    //选择教材
+    function selectJcsms(_path,id,name,where) {
+	 	if(where == undefined) where="";
+     	var url = _path+"/jiaowu/jcgl/selectJcsmO.jsp?id="+id+"&name="+name+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:700px; dialogWidth:700px");
+    }
+    //一级开课单位
+    function selectXx0301_kkdw_top(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0301_kkdw_top_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+    }
+    //带权限控制的开课单位
+    function selectXx0301_kkdw_qx(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0301_kkdw_qx_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:700px");
+    }
+     //开课通知单类别
+    function selectJx0404_kktzd(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/jx0404_kktzd.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:750px");
+    }
+    //上课单位
+    function selectXx0301_skdw(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xx0301_skdw_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:700px");
+    }
+      
+    //-------------end-----------
+    
+    
+    //-------start(zhangbo)------
+    //数据发布查找指定考试场次（带限制条件 带考试名称）  
+    function selectZdKscc(_path,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kwgl_queryKscc.jsp?name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:740px");
+    }
+    //数据发布查找教师信息（带限制条件 必须在KW0405表中）
+    function selectJsxx(_path,name,type,where){
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/kwgl_queryJsxx.jsp?name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:680px");
+    }
+    //数据发布查找教师信息（带限制条件 带考试名称）  
+    function selectAllJsxx(_path,name,type,where){
+    	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/select_alljs.jsp?name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:720px");
+    }
+    //数据发布查找指定考场（未带限制条件 带考试名称）  
+    function selectAllKc(_path,name,type,where){
+        if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/select_AllKc.jsp?name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:500px; dialogWidth:750px");
+    }
+    function selectXs0101(_path,id,name,type,where) {
+	 	if(type == undefined) type="0";
+	 	if(where == undefined) where="";
+     	var url = _path+"/common/xs0101_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+     	window.showModalDialog(url,window,"dialogHeight:550px; dialogWidth:700px");
+    }
+    //-------------end----------
+ 
+   document.onkeydown = function() {
+	   if(event.keyCode == 116){ top.sp_isRefash = true;}
+   }
+
+	
+	function theFocus(name) {
+		document.all(name).focus();
+	}
+	
+/**
+* Date对象原形扩展
+*/
+Date.prototype.format = function(formatter)
+{
+    if(!formatter || formatter == "")
+    {
+        formatter = "yyyy-MM-dd";
+    }
+    var year = this.getYear().toString();
+    var month = (this.getMonth() + 1).toString();
+    var day = this.getDate().toString();
+    var hours = this.getYear().toString();
+    var minutes = this.getMinute().toString();
+    var seconds = this.getSecond().toString();
+    
+    var yearMarker = formatter.replace(/[^y|Y]/g,'');
+    if(yearMarker.length == 2)
+    {
+        year = year.substring(2,4);
+    }    
+    var monthMarker = formatter.replace(/[^m|M]/g,'');
+    if(monthMarker.length > 1)
+    {
+        if(month.length == 1) 
+        {
+            month = "0" + month;
+        }
+    }    
+    var dayMarker = formatter.replace(/[^d]/g,'');
+    if(dayMarker.length > 1)
+    {
+        if(day.length == 1) 
+        {
+            day = "0" + day;
+        }
+    }
+    var hoursMarker = formatter.replace(/[^h]/g,'');
+    var minutesMarker = formatter.replace(/[^m]/g,'');
+    var secondsMarker = formatter.replace(/[^s]/g,'');
+    
+    minutes = ((minutes <  10) ? "0" : "") + minutes;
+    seconds = ((seconds <  10) ? "0" : "") + seconds;
+    
+    return formatter.replace(yearMarker,year).replace(monthMarker,month).replace(dayMarker,day).replace(hoursMarker,hours).replace(minutesMarker,minutes).replace(secondsMarker,seconds);    
+}
+
+Date.parseString = function(dateString,formatter)
+{
+    var today = new Date();
+    if(!dateString || dateString == "")
+    {
+        return today;
+    }
+    if(!formatter || formatter == "")
+    {
+        formatter = "yyyy-MM-dd";
+    }  
+    var yearMarker = formatter.replace(/[^y|Y]/g,'');   
+    var monthMarker = formatter.replace(/[^m|M]/g,'');   
+    var dayMarker = formatter.replace(/[^d]/g,'');
+    var hoursMarker = formatter.replace(/[^h]/g,'');
+    var minutesMarker = formatter.replace(/[^m]/g,'');
+    var secondsMarker = formatter.replace(/[^s]/g,'');
+    
+    
+    var yearPosition = formatter.indexOf(yearMarker);
+    var yearLength = yearMarker.length;
+    var year =  dateString.substring(yearPosition ,yearPosition + yearLength) * 1;
+    if( yearLength == 2)
+    {
+        if(year < 50 )
+        {
+            year += 2000;
+        }
+        else
+        {
+            year += 1900;
+        }
+    }
+    var monthPosition = formatter.indexOf(monthMarker);
+    var month = dateString.substring(monthPosition,monthPosition + monthMarker.length) * 1 - 1;
+    var dayPosition = formatter.indexOf(dayMarker);
+    var day = dateString.substring( dayPosition,dayPosition + dayMarker.length )* 1;
+    
+    var hourPosition = formatter.indexOf(hoursMarker);
+    var hourLength = hoursMarker.length;
+    var hour =  dateString.substring(hourPosition ,hourPosition + hourLength) * 1;
+    
+    var minutePosition = formatter.indexOf(minutesMarker);
+    var minuteLength = minutesMarker.length;
+    var minute =  dateString.substring(minutePosition ,minutePosition + minuteLength) * 1;
+    
+    var secondPosition = formatter.indexOf(secondsMarker);
+    var secondLength = secondsMarker.length;
+    var second =  dateString.substring(secondPosition ,secondPosition + secondLength) * 1;
+    
+    return new Date(year,month,day,hour,minute,second);
+}
+/**
+*	JAVA的MAP类
+*/
+function Map() {
+ var struct = function(key, value) {
+  this.key = key;
+  this.value = value;
+ }
+ 
+ var put = function(key, value){
+  for (var i = 0; i < this.arr.length; i++) {
+   if ( this.arr[i].key === key ) {
+    this.arr[i].value = value;
+    return;
+   }
+  }
+  this.arr[this.arr.length] = new struct(key, value);
+ }
+ 
+ var get = function(key) {
+  for (var i = 0; i < this.arr.length; i++) {
+   if ( this.arr[i].key === key ) {
+     return this.arr[i].value;
+   }
+  }
+  return null;
+ }
+ 
+ var remove = function(key) {
+  var v;
+  for (var i = 0; i < this.arr.length; i++) {
+   if ( this.arr[i].key === key ) {
+     this.arr.splice(i,1);
+   }
+  }
+ }
+ 
+ var size = function() {
+  return this.arr.length;
+ }
+ 
+ var isEmpty = function() {
+  return this.arr.length <= 0;
+ }
+ 
+ var keySet = function() {
+ 	var keys = new Array();
+ 	for (var i = 0; i < this.arr.length; i++) {
+ 		keys[keys.length] = this.arr[i].key;
+ 	}
+ 	return keys;
+ }
+ 
+ var valueSet = function() {
+ 	var values = new Array();
+ 	for (var i = 0; i < this.arr.length; i++) {
+ 		values[values.length] = this.arr[i].value;
+ 	}
+ 	return values;
+ }
+ 
+ var entrySet = function(){
+ 	return this.arr;
+ }
+
+ this.arr = new Array();
+ this.get = get;
+ this.put = put;
+ this.remove = remove;
+ this.size = size;
+ this.isEmpty = isEmpty;
+ this.keySet = keySet;
+ this.valueSet = valueSet;
+ this.entrySet = entrySet;
+}
+
+function openWindow(url,opts,args,replace){
+	var width = '600';
+	var height = '450';
+	var top = '';
+	var left = '';
+	
+	var channelmode = 'no';
+	var directories = 'yes';
+	var fullscreen = 'no'; 
+	var location = 'yes';
+	var menubar = 'yes'; 
+	var resizable = 'yes'; 
+	var scrollbars = 'yes';
+	var status = 'yes';
+	var titlebar = 'yes';
+	var toolbar = 'yes';
+	
+	if(url==null || url == 'undefined')
+		url = "about:blank";
+	if(args==null || args == 'undefined')
+		args = '_blank';
+	if(opts==null || opts == 'undefined')
+		opts = {};
+	
+	if(opts){
+		width = opts.width?opts.width:'800';
+		height = opts.height?opts.height:'450';
+		top = opts.top?opts.top : '';
+		left = opts.left?opts.left : '';
+		
+		channelmode = opts.channelmode?opts.channelmode : 'no';
+		directories = opts.directories?opts.directories : 'no';
+		fullscreen = opts.fullscreen?opts.fullscreen : 'no';
+		location = opts.location?opts.location : 'no';
+		menubar = opts.menubar?opts.menubar : 'no';
+		resizable = opts.resizable?opts.resizable : 'no';
+		scrollbars = opts.scrollbars?opts.scrollbars : 'yes';
+		status = opts.status?opts.status : 'no';
+		titlebar = opts.titlebar?opts.titlebar : 'no';
+		toolbar = opts.toolbar?opts.toolbar : 'no';
+	}
+	
+	// 如果left top没有值就居中
+	if(left == '' && top == '')	{
+		var w = screen.availWidth;
+		var h = screen.availHeight;
+		left = parseInt(w)/2 - parseInt(width)/2;
+		top = parseInt(h)/2 - (parseInt(height)/2 + 20);
+	}
+	
+	var feature = 'width=' + width + 'px,' +
+				  'height=' + height + 'px,' +
+				  'left=' + left + ',' +
+				  'top=' + top + ',' +
+				  'channelmode=' + channelmode + ',' +
+				  'directories=' + directories + ',' +
+				  'fullscreen=' + fullscreen + ',' +
+				  'location=' + location + ',' +
+				  'menubar=' + menubar + ',' +
+				  'resizable=' + resizable + ',' +
+				  'scrollbars=' + scrollbars + ',' +
+				  'status=' + status + ',' +
+				  'titlebar=' + titlebar + ',' +
+				  'toolbar=' + toolbar;
+				  
+	window.open(url,args,feature);
+}
+
+var HKEY_Root,HKEY_Path,HKEY_Key; 
+HKEY_Root="HKEY_CURRENT_USER"; 
+HKEY_Path="\\Software\\Microsoft\\Internet Explorer\\PageSetup\\"; 
+//设置网页打印的页眉页脚为空 
+function PageSetup_Null() 
+{ 
+try 
+{ 
+         var Wsh=new ActiveXObject("WScript.Shell"); 
+  HKEY_Key="header"; 
+  Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,""); 
+  HKEY_Key="footer"; 
+  Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,""); 
+} 
+catch(e){} 
+} 
+//设置网页打印的页眉页脚为默认值 
+function  PageSetup_Default() 
+{   
+try 
+{ 
+  var Wsh=new ActiveXObject("WScript.Shell"); 
+  HKEY_Key="header"; 
+  Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"&w&b页码,&p/&P"); 
+  HKEY_Key="footer"; 
+  Wsh.RegWrite(HKEY_Root+HKEY_Path+HKEY_Key,"&u&b&d"); 
+} 
+catch(e){} 
+} 
+
+
+
+//Version: 2.07
+//打开新窗口：标题为其父窗口的url_新窗口的url
+//Created:	xxli@2003.12
+//Updated:	xxli@2004.08.25	[*] 2.x版本同1.x版本主要改动在参数和返回值上
+//			xxli@2005.01.12
+//注：因为有返回值，在标记的href中调用时，务必在最后添加void(0)语句
+function openWin(whref, wname, wfeatures, wwidth, wheight)
+{
+	whref = whref.replace(/^(( )|(　)|\r|\n|\t)*/g,"").replace(/(( )|(　)|\r|\n|\t)*$/g,"");
+	var regExp = /\W/gi;	// \W = [^A-Za-z0-9_]
+	if (!wname) wname= window.location.href.replace(regExp, "") + "_" + whref.replace(regExp,"");
+	if ( wfeatures ) wfeatures = wfeatures.replace(/;/g, ",").replace(/ /g, "");
+	if ( (typeof(wwidth)!="undefined") && (typeof(wheight)!="undefined") )	{
+		wfeatures +=  ",width=" + wwidth + ",height=" + wheight;
+		var x = parseInt( (screen.availWidth-wwidth-10)   * 0.5 );
+		var y = parseInt( (screen.availHeight-wheight-30) * 0.5 );
+		if (wfeatures.indexOf("left") == -1) {
+			wfeatures +=  ",left=" + x;
+			wfeatures +=  ",screenX=" + x;
+		}
+		if (wfeatures.indexOf("top") == -1) {
+			wfeatures +=  ",top=" + y;
+			wfeatures +=  ",screenY=" + y;
+		}
+	};
+	var oWin = (wfeatures) ? window.open(whref,wname,wfeatures) : window.open(whref,wname);
+	if ( wfeatures && x && y )
+		oWin.moveTo( x, y );
+	return oWin;
+}
+
+//选择论文题目 童峰 2012-11-28 从湖南科大移植
+function selectLwtm(_path,id,name,type,jb){
+	if(type == undefined) type="0";
+ 	if(jb == undefined) jb="";
+ 	var url = _path+"/common/sj1102_select_lwtm.jsp?id="+id+"&name="+name+"&type="+type+"&jb="+jb;
+ 	window.showModalDialog(url,window,"dialogHeight:600px; dialogWidth:800px");
+}

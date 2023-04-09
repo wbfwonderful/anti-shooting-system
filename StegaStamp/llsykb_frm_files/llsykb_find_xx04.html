@@ -1,0 +1,431 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0113)http://csujwc.its.csu.edu.cn/jiaowu/pkgl/llsykb/llsykb_find_xx04.jsp?init=1&xx04id=&isview=1&xnxq01id=2022-2023-2 -->
+<html class="panel-fit"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body marginwidth="0" marginheight="0" class="easyui-layout layout panel-noscroll" fit="true" style=""><div align="left"> 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+</div> 
+	
+<!--<base target="_self">--><base href="." target="_self"><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8"><meta http-equiv="Content-Language" content="zh-cn"><link rel="stylesheet" href="./easyui.css"><link rel="stylesheet" href="./icon.css"><link rel="stylesheet" href="./demo_page.css"><link rel="stylesheet" href="./demo_table.css"><link rel="stylesheet" href="./jquery.dataTables.css"><link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./list.css"><script type="text/javascript" src="./engine.js.下载"></script><script type="text/javascript" src="./util.js.下载"></script><script type="text/javascript" src="./dwrMonitor.js.下载"></script><script type="text/javascript" src="./jquery.min.js.下载"></script><script type="text/javascript" src="./jquery.easyui.min.js.下载"></script><script type="text/javascript" src="./easyui-lang-zh_CN.js.下载"></script><script type="text/javascript" src="./jquery.dataTables.min.js.下载"></script><script type="text/javascript" src="./qzTag.js.下载"></script><script type="text/javascript" src="./jquery.tablePagination.js.下载"></script><script type="text/javascript" src="./jquery.contextmenu.r2.js.下载"></script><script type="text/javascript" src="./jspublic.js.下载"></script><script type="text/javascript" src="./validate.js.下载"></script><script type="text/javascript" src="./newJspublic.js.下载"></script><script> var basePath='http://csujwc.its.csu.edu.cn'; </script><title>各类课表查询·中南大学·版权所有</title><iframe id="hideFrame" name="hideFrame" style="width:0px;height:0px;display:none;" src="./saved_resource.html"></iframe><div class="panel layout-panel layout-panel-center" style="left: 0px; top: 0px; width: 1536px;"><div id="tag_mainView" data-options="region:&#39;center&#39;" style="padding: 2px; width: 1532px; height: 643.2px;" title="" class="panel-body panel-body-noheader layout-body"> 
+<style>
+
+.ui-autocomplete{
+
+       z-index: 1111111;
+
+}
+
+</style>
+<script src="./jquery-1.4.3.min.js.下载" type="text/javascript"></script>
+<script src="./jquery.autocomplete.js.下载" type="text/javascript"></script>
+<link href="./tab.css" rel="stylesheet" type="text/css"> 
+<link href="./jquery.autocomplete.css" rel="stylesheet" type="text/css"> 
+<link rel="stylesheet" href="./easyui.css">
+<link rel="stylesheet" href="./icon.css">
+<link rel="stylesheet" href="./demo_page.css">
+<link rel="stylesheet" href="./demo_table.css">
+<link rel="stylesheet" href="./jquery.dataTables.css">
+<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./list.css">
+<script type="text/javascript" src="./jquery.easyui.min.js.下载"></script>
+<script type="text/javascript" src="./easyui-lang-zh_CN.js.下载"></script>
+<script type="text/javascript" src="./jquery.dataTables.min.js.下载"></script>
+<script type="text/javascript" src="./qzTag.js.下载"></script>
+<script type="text/javascript" src="./jquery.tablePagination.js.下载"></script>
+<script type="text/javascript" src="./jquery.contextmenu.r2.js.下载"></script>
+<script type="text/javascript" src="./jspublic.js.下载"></script>
+<script type="text/javascript" src="./validate.js.下载"></script>
+<script type="text/javascript" src="./newJspublic.js.下载"></script>
+ 
+<div id="toolbar" align="center">
+	<input type="hidden" name="headTitle" value="各类课表查询">
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" id="tbTable">
+		<tbody><tr height="35" bgcolor="#B3D9FE">
+			<td width="70px;">
+				<a onclick="javascript:printKb();"> 
+					<img style="cursor:pointer;vertical-align:middle;" border="0" src="./dy.png">打印
+				</a>
+			</td>
+            <td width="90px;">
+                <a onclick="javascript:printKbh();">
+                    <img style="cursor:pointer;vertical-align:middle;" border="0" src="./dy.png">横向打印
+                </a>
+            </td>
+			<td align="left">
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>各类课表查询：</b>
+				
+				<input type="radio" name="kbtype" value="xx04" checked="checked" style="vertical-align:middle;">按行政班级&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<input type="radio" name="kbtype" onclick="changeKb(this)" value="jg0101" style="vertical-align:middle;">按教师&nbsp;&nbsp;&nbsp;&nbsp;
+                
+			 	<input type="radio" name="kbtype" onclick="changeKb(this)" value="jx02" style="vertical-align:middle;">按课程&nbsp;&nbsp;&nbsp;&nbsp;
+			 	<input type="radio" name="kbtype" onclick="javascript:JsOpen(960,600);" value="time" style="vertical-align:middle;">按时间&nbsp;&nbsp;&nbsp;&nbsp;
+                
+				<input type="radio" name="kbtype" onclick="changeKb(this);" value="jxbmc" style="vertical-align:middle;">按教学班&nbsp;&nbsp;&nbsp;&nbsp;
+			</td>
+		</tr>
+ 	</tbody></table>
+ </div>
+
+<form target="llsykb_kb" id="Form1" name="Form1" method="post" action="http://csujwc.its.csu.edu.cn/jiaowu/pkgl/llsykb/llsykb_kb.jsp" style="margin:0px;">
+	<input type="hidden" name="type" id="type" value="xx04">
+	<input type="hidden" name="isview" id="isview" value="1">
+ 	<table border="0" width="100%" cellpadding="0" cellspacing="0">
+	 <tbody><tr height="35px" style="vertical-align: middle;"> 
+	 	<td>&nbsp;&nbsp;<input type="hidden" name="xx04id" value="84BE0C0B61A447B8BB48A9283031200D" id="xx04id">
+			&nbsp;&nbsp;
+			院系：<select id="yxbh" name="yxbh" style="width:130px;" size="1" onchange="loadZy(&#39;yxbh&#39;)"><option value="">---请选择---</option><option value="01">[01]地球科学与信息物理学院</option><option value="02">[02]资源与安全工程学院</option><option value="03">[03]资源加工与生物工程学院</option><option value="05">[05]冶金与环境学院</option><option value="06">[06]材料科学与工程学院</option><option value="07">[07]粉末冶金研究院</option><option value="08">[08]机电工程学院</option><option value="09">[09]信息科学与工程学院</option><option value="10">[10]能源科学与工程学院</option><option value="11">[11]交通运输工程学院</option><option value="12">[12]土木工程学院</option><option value="13">[13]数学与统计学院</option><option value="14">[14]物理与电子学院</option><option value="15">[15]化学化工学院</option><option value="16">[16]商学院</option><option value="17">[17]文学与新闻传播学院</option><option value="18">[18]外国语学院</option><option value="19">[19]建筑与艺术学院</option><option value="20">[20]法学院</option><option value="21">[21]马克思主义学院</option><option value="22">[22]湘雅医学院</option><option value="28">[23]基础医学院</option><option value="23">[24]湘雅药学院</option><option value="24">[25]湘雅护理学院</option><option value="25">[26]湘雅公共卫生学院</option><option value="26">[27]湘雅口腔医学院</option><option value="37">[28]生命科学学院</option><option value="yrywAitb5I">[34]轻合金研究院</option><option value="39">[39]软件学院</option><option value="9A">[42]航空航天技术研究院</option><option value="43">[43]公共管理学院</option><option value="sa2sL7Lyaj">[4315]中国村落文化研究中心</option><option value="04">[45]大数据研究院</option><option value="66">[66]体育教研部</option><option value="75">[75]研究生院</option><option value="tc9qn3Xixg">[78]邓迪国际学院</option><option value="9B">[93]国际合作与交流处</option><option value="95">[95]计算机学院</option><option value="96">[96]自动化学院</option><option value="33">[98]高教所</option></select>
+			
+			&nbsp;
+			年级：<select id="rxnf" name="rxnf" style="width:60px;" size="1" onchange="loadZy(&#39;rxnf&#39;)"><option value="">---请选择---</option><option value="2023">2023</option><option value="2022">2022</option><option value="2021">2021</option><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option><option value="2016">2016</option><option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option><option value="2010">2010</option><option value="2009">2009</option><option value="2008">2008</option><option value="2007">2007</option><option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option></select>
+			
+			&nbsp;
+			专业：
+			<select id="zy" name="zy" onchange="loadBj()"><option value="">请选择</option><option value="3901">软件工程</option><option value="20F25640A22F4A7ABCD492629A1227EC">计算机科学与技术卓越人才培养</option><option value="0906">信息安全</option><option value="AE17CAA3F299495195B1A14127295C69">计算机与通信类</option><option value="0902">计算机科学与技术</option><option value="27A0B85B87B245969B5782B0C8ABF916">数据科学与大数据技术</option><option value="0919">物联网工程</option><option value="FAF33A5B74084CA79F62C6BA0E308064">软件工程类</option><option value="0905">通信工程</option></select>
+			&nbsp;
+			班级：<input type="text" value="" name="bjbh" onblur="clear1(this,&#39;xx04id&#39;)" id="bjbh" style="width:100px" autocomplete="off" class="ac_input">&nbsp;&nbsp;
+			&nbsp;&nbsp;周次： 
+			<select name="zc" style="width:130px;">
+			 <option value="">(全部周次)</option>
+			<option value="1">第1周</option><option value="2">第2周</option><option value="3">第3周</option><option value="4">第4周</option><option value="5">第5周</option><option value="6">第6周</option><option value="7">第7周</option><option value="8">第8周</option><option value="9">第9周</option><option value="10">第10周</option><option value="11">第11周</option><option value="12">第12周</option><option value="13">第13周</option><option value="14">第14周</option><option value="15">第15周</option><option value="16">第16周</option><option value="17">第17周</option><option value="18">第18周</option><option value="19">第19周</option><option value="20">第20周</option><option value="21">第21周</option><option value="22">第22周</option><option value="23">第23周</option><option value="24">第24周</option><option value="25">第25周</option><option value="26">第26周</option><option value="27">第27周</option><option value="28">第28周</option><option value="29">第29周</option><option value="30">第30周</option>
+			</select>
+			&nbsp;
+			学年学期：<select id="xnxq01id" name="xnxq01id" style="width:100px;" size="1" onchange="loadBj()"><option value="">---请选择---</option><option value="2022-2023-2" selected="">2022-2023-2</option><option value="2022-2023-1">2022-2023-1</option><option value="2021-2022-2">2021-2022-2</option><option value="2021-2022-1">2021-2022-1</option><option value="2020-2021-2">2020-2021-2</option><option value="2020-2021-1">2020-2021-1</option><option value="2019-2020-2">2019-2020-2</option><option value="2019-2020-1">2019-2020-1</option><option value="2018-2019-2">2018-2019-2</option><option value="2018-2019-1">2018-2019-1</option><option value="2017-2018-2">2017-2018-2</option><option value="2017-2018-1">2017-2018-1</option><option value="2016-2017-2">2016-2017-2</option><option value="2016-2017-1">2016-2017-1</option><option value="2015-2016-2">2015-2016-2</option><option value="2011-2012-1">2011-2012-1</option></select><font color="red">*</font>
+		 	&nbsp;
+		 	<input type="hidden" id="xx04mc" name="xx04mc">
+		 	
+		 	<!--  input type="button" value="选择" class="button" title="选择班级" onclick="selectXx04(this)">  -->
+		 	<input type="button" value="查询" class="button" title="点击查询课表" onclick="funSearch()">
+		 	
+			<input type="checkbox" id="sfFD" name="sfFD" value="1" checked="checked" onclick="funFRMFD(this)" style="vertical-align:middle;">放大
+			<input type="checkbox" id="sfBZ" name="sfBZ" value="1" onclick="funFRMBZ(this)" style="vertical-align:middle;">显示备注
+			<input type="checkbox" id="xsfl" name="xsfl" value="1" onclick="funShowXsfl(this)" style="vertical-align:middle;">显示学时
+	 	</td>
+	 
+	 	</tr>
+	 </tbody></table>
+	 
+</form>
+	<iframe src="./llsykb_kb.html" name="llsykb_kb" id="llsykb_kb" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width:100%;height:100%;">
+		</iframe>
+</div></div><script> $(function(){  initMain(); }); </script> 
+
+<script src="./validate.js.下载" type="text/javascript"></script>
+<script type="text/javascript">
+  
+    
+	function JsOpen(tmpWidth,tmpHeight){
+		var findtype='';
+		if('1' =='1'){
+			findtype = "cx";
+		}else{
+			findtype = "gl";
+		}
+		var newwin = window.showModalDialog("/tkglAction.do?method=tzkb&first=yes&type=1&isview=1&findType="+findtype,"","dialogWidth:"+tmpWidth+"px;status:no;dialogHeight:"+tmpHeight+"px");
+	}
+	
+function selectZy(){
+	var zy=document.getElementById("zy").value;
+	var rxnf= document.getElementsByName('rxnf')[0]; 	
+	var selectedrxnf="";
+	for(var i=0;i<rxnf.length;i++){ 
+		 if(rxnf[i].selected){
+		 	if(selectedrxnf==""){
+		 		selectedrxnf=rxnf[i].value;
+		 	}else{
+		 		selectedrxnf+=","+rxnf[i].value;
+		 	} 
+		 }
+	}
+/*	var rxnfwhere="" ;
+	if(selectedrxnf != ""){
+		rxnfwhere = " rxnf in("+selectedrxnf.substr(0,selectedrxnf.length-1)+") ";	  
+	}	
+	dwrMonitor.getDataList("xx04","xx04id, bj","1", rxnfwhere+" and isdel='0' and ylzd = '1' and zt = '1' and  exists( select 1 from jx01nd j left join jx01 j1 on j.zyh=j1.jx01id  where xx04.jx01ndid=j.jx01ndid and j1.jx01id='"+zy+"') order by bj asc ",getDataResultBj); 
+	*/
+	
+	dwrMonitor.getDataList_dtaxx04(selectedrxnf,zy,getDataResultBj); 
+}
+
+var bjjson1 = "";
+function getDataResultBj(dataList){
+	if(dataList.length>0){
+		bjjson1 = "[";
+		for(var i=0;i<dataList.length;i++){
+			bjjson1+="{xx04id:'"+dataList[i][0]+"',bj:'"+dataList[i][1]+"'},";
+		}
+		bjjson1=bjjson1.substring(0,bjjson1.length-1);
+		bjjson1 += "]";
+		loadBj(bjjson1);
+	}else{
+		
+	}
+}
+
+function funValidate(){
+	if(document.getElementById("xnxq01id").value== ""){
+		alert("请选择学年学期！");
+		return false;
+	}
+	 
+	var xx04id = document.getElementById("xx04id");
+	if(document.getElementById("xx04id").value== "" ){
+		alert("请选择班级！");
+		return false;
+	}
+	return true;
+}
+
+
+function funSearch(){ 
+	if(!funValidate()){
+		return false;
+	}
+	try{
+		window.llsykb_kb.openProgress();
+		
+	}catch(e){
+		
+	}
+/*	window.parent.llsykb_kb.document.getElementById("creating").style.display="";
+	window.parent.llsykb_kb.document.getElementById("creating").style.visibility="visible";
+	window.parent.llsykb_list.document.getElementById("creating").style.display="";
+	window.parent.llsykb_list.document.getElementById("creating").style.top = "100px";
+	window.parent.llsykb_list.document.getElementById("creating").style.visibility="visible"; */
+
+	document.getElementById("Form1").action = "/jiaowu/pkgl/llsykb/llsykb_kb.jsp";
+	document.getElementById("Form1").target = "llsykb_kb";
+	document.getElementById("Form1").submit();
+	
+	//document.getElementById("Form1").action = "/jiaowu/pkgl/llsykb/llsykb_list.jsp";		
+	//document.getElementById("Form1").target = "llsykb_list";
+	//document.getElementById("Form1").submit();
+}
+
+function funFRMFD(obj){
+	window.llsykb_kb.funFD(obj.checked);
+}
+ 
+function funFRMBZ(obj){
+	window.llsykb_kb.funBZ(obj.checked);
+}
+
+function funShowXsfl(obj){
+	window.llsykb_kb.showXsfl(obj.checked);
+}
+ 
+function selectXx04(obj){ 
+	var _path='';
+	var id='xx04id';
+	var name='xx04mc';
+	var type='1';
+	var where='';	 
+	if(type == undefined){
+		type="0";
+	}
+ 	if(where == undefined){
+ 		where="";
+ 	}
+ 	var url = _path+"/common/llsykb/xx04_select.jsp?id="+id+"&name="+name+"&type="+type+"&where="+where;
+ 	window.showModalDialog(url,window,"dialogHeight:600px;dialogWidth:700px"); 
+}
+
+
+function selectXx04Value(xx04id,xx04mc){ 
+	var bjbhs =document.getElementById('bjbh');	
+	var flag = false;
+	  for (var i = 0; i < bjbhs.options.length; i++){
+	    
+	    if(bjbhs.options[i].value == xx04id){
+	     	flag = true;
+	     	bjbhs.options[i].selected = true;
+	     	break;
+	     }
+	       
+	  }
+	if(!flag){
+	  	var opt =   new  Option(xx04mc ,xx04id);
+	  	bjbhs.options.length = 0;
+	  	bjbhs.options.add(opt); 
+	}
+}
+function clearXx04(){
+	document.getElementById("xx04id").value = "";
+//	document.getElementById("xx04mc").value = "";
+}
+
+function printLlsykb(){
+	if(!funValidate()){
+		return false;
+	}
+	if(!confirm("您是否确定打印课表！")){
+		return false;
+	}
+	try{
+		window.llsykb_kb.searchVisibility();
+	}catch(e){
+		
+	} 
+	document.getElementById("Form1").action = "/pklbAction.do?method=printLlsykb";	
+	document.getElementById("Form1").target = "ifrmPrint"; 
+	document.getElementById("Form1").submit();
+}
+
+function printVisibilityFalse(){
+	window.parent.llsykb_kb.searchVisibilityFalse();
+}
+
+function changeKb(obj){ 
+	if(obj.checked){
+		window.location.href = "/jiaowu/pkgl/llsykb/llsykb_find_"+obj.value+".jsp?xnxq01id=2022-2023-2&init=1&isview=1";
+		window.document.getElementById("llsykb_kb").src = "/jiaowu/pkgl/llsykb/llsykb_kb.jsp?xnxq01id=2022-2023-2&init=1";
+		//window.parent.document.getElementById("llsykb_list").src = "/jiaowu/pkgl/llsykb/llsykb_list.jsp?xnxq01id=2022-2023-2&init=1";
+		
+	}
+}
+
+function printKb(){
+ 	var xnxq01id = document.getElementById("xnxq01id").value;
+ 	var xnxqh = xnxq01id;
+ 	var xnxqhmc = xnxq01id;
+ 	if(xnxq01id == ""){
+		alert("请选择一个学年学期！");
+ 		return false;
+ 	}
+   	var bjbh = document.getElementById("xx04id").value;
+	mc1 = xnxq01id;
+	if(xnxq01id==""){
+		 	mc1="无学年学期信息";
+	}
+	var yxbh = $("#yxbh").val();
+	
+	var nj = $("#rxnf").val();
+	var zy = $("#zy").val();
+	type = "bj";
+	var sqlwhere='/jiaowu/tkgl/listKbdy.jsp?type='+type+"&bjbh="+bjbh+"&xnxqh="+xnxqh+"&xnxqhmc="+xnxqhmc+"&yxbh="+yxbh+"&nj="+nj+"&zy="+zy;
+	JsMod(sqlwhere,500,400); 
+	
+}
+
+    function printKbh(){
+        var xnxq01id = document.getElementById("xnxq01id").value;
+        var xnxqh = xnxq01id;
+        var xnxqhmc = xnxq01id;
+        if(xnxq01id == ""){
+            alert("请选择一个学年学期！");
+            return false;
+        }
+        var bjbh = document.getElementById("xx04id").value;
+        mc1 = xnxq01id;
+        if(xnxq01id==""){
+            mc1="无学年学期信息";
+        }
+        var yxbh = $("#yxbh").val();
+
+        var nj = $("#rxnf").val();
+        var zy = $("#zy").val();
+        type = "bj";
+		document.Form1.action='/tkglAction.do?method=printhExcel&type='+type+"&bjbh="+bjbh+"&xnxqh="+xnxqh+"&xnxqhmc="+xnxqhmc+"&yxbh="+yxbh+"&nj="+nj+"&zy="+zy;
+		document.Form1.submit();
+
+    }
+
+	function clear1(obj,obj1){
+		if(obj.value==""){
+			document.getElementById(obj1).value="";
+		}
+	}
+	function loadZy(type){
+		var yxbh=document.getElementById("yxbh").value;
+		var rxnf = document.getElementById("rxnf").value;
+		var jx01id = "";
+		if(yxbh!=""){
+			var url = "/KbctjcAction.do?method=queryzy&yxbh="+yxbh+"&rxnf="+rxnf;
+			$.post(url,null,function(json){
+				if(json!=""){
+					json=eval(json);
+					document.getElementById("zy").innerHTML="";
+					var zyHtml="<option value=''>请选择</option>";
+					for(var i=0; i<json.length; i++){  
+						zyHtml += "<option value='"+json[i].jx01id+"'>"+json[i].zymc+"</option>"; 
+					}
+					
+					document.getElementById("zy").innerHTML=zyHtml;
+					if(jx01id!=''){
+						$("#zy").val(jx01id);
+					}
+					if(type=="yxbh"){
+						loadBj();
+					}
+				}
+			});
+		}
+	}
+	
+	function loadBj(){
+		$("#bjbh").flushCache();
+		var yxbh=document.getElementById("yxbh").value;
+		var rxnf = document.getElementById("rxnf").value;
+		var zy = document.getElementById("zy").value;
+		var xnxq01id = document.getElementById("xnxq01id").value;
+		var url = "/KbctjcAction.do?method=querybj";
+		if(yxbh!=""){
+			url += "&yxbh="+yxbh;
+		}
+		if(rxnf!=""){
+			url += "&rxnf="+rxnf;
+		}
+		if(zy!=""){
+			url +="&zy="+zy;
+		}
+		if(xnxq01id!=""){
+			url +="&xnxq01id="+xnxq01id;
+		}
+		$.post(url,null,function(json){
+				if(json!=""){
+					json=eval("("+json+")");
+					$("#bjbh").autocomplete(json, {
+						minChars: 0,
+						width: 120,
+						matchContains: true,
+						autoFill: false,
+						max:80,
+						formatItem: function(row, i, max) {
+							return row.bj;
+						},
+						formatMatch: function(row, i, max) {
+							return row.bj;
+						},
+						formatResult: function(row) {
+							return row.bj;
+						}
+					});
+					$("#bjbh").result(function(event, data, formatted) {
+						if (data){
+							document.getElementById("xx04id").value=data.xx04id;
+						}
+					});
+					var xx04id = "";
+					if(xx04id != 'null' && xx04id != null && typeof(xx04id)!="undefined" && xx04id != ''){
+						funSearch();
+					}
+				}
+		});
+	}
+	
+	window.onload=function(){
+		loadZy();
+		loadBj();
+	}
+	
+</script>
+<div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div><div class="layout-split-proxy-h"></div><div class="layout-split-proxy-v"></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"></ul></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"></ul></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"></ul></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"></ul></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"></ul></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"></ul></div><div class="ac_results" style="position: absolute; width: 120px; top: 57.0125px; left: 584.062px; display: none;"><ul style="max-height: 180px; overflow: auto;"><li class="ac_even"><strong>信</strong>安2101</li><li class="ac_odd"><strong>信</strong>安2102</li></ul></div></body></html>

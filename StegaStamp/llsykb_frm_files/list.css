@@ -1,0 +1,32 @@
+@charset "utf-8";
+body,input,select{font-family:"微软雅黑";font-size:12px;}
+a {color:#0C5FC0;text-decoration:none}
+.ce{ text-align:center;}
+.red{ color:#F00;}
+.b {font-weight:bold}
+.hack10{ height:10px;line-height:0px;font-size:0px;clear:both;}
+
+.di1{
+	height:40px; 
+	border:1px solid #E5E5E5; 
+	font-family:"微软雅黑";
+	font-size:12px; 
+	width:99.6%;
+	margin-bottom:3px;
+	margin-top:2px;
+}
+
+.di2{ font-size:12px; height:35px; background-color:#EFEFEF; border-bottom:1px solid #D3D3D3; border-left:1px solid #D3D3D3; border-right:1px solid #D3D3D3;}
+
+.inputa{ height:28px; line-height:25px; color:#FFF; background-color:#2F88EE; width:61px; border:0;}
+.inputa1{ height:28px; line-height:25px; color:#FFF; background-color:#2F88EE; width:85px; border:0;}
+.inputb{ height:28px; line-height:28px; width:98px; border:1px solid #BECCD7;}
+.inputb1{ height:28px; line-height:28px; width:23px; border:1px solid #BECCD7;}
+.inputx{ height:24px; line-height:24px; width:98px; border:1px solid #BECCD7;}
+.inputx1{ height:24px; line-height:24px; width:70px; border:1px solid #BECCD7;}
+.inputx2{ height:24px; line-height:24px; width:108px; border:1px solid #BECCD7;}
+.inputx3{ height:24px; line-height:24px; width:116px; border:1px solid #BECCD7;}
+
+.xtable{line-height:30px;font-size:12px;text-align: center;color:#333;background-color:#E8E6E6;border-width: 1px;border-collapse: collapse;}
+.xtable td{background:#ffffff;border-width:1px;border-style: solid;border-color: #E8E6E7;background-color: #ffffff;}
+.xtable th{color:#333333;border-width: 1px;border-style: solid;border-color: #D9D5D6;background-color: #F7F7F7;}

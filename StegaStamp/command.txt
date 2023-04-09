@@ -1,0 +1,13 @@
+Encoding a Message
+
+python encode_image.py saved_models/stegastamp_pretrained --image test/test1.png  --save_dir out/ --secret WBF
+
+
+Decoding a Message
+
+python decode_image.py saved_models/stegastamp_pretrained --image out/test_hidden.png
+
+
+Detecting and Decoding
+
+python detector.py --detector_model detector_models/stegastamp_detector --decoder_model saved_models/stegastamp_pretrained --video test/test_plant.mp4 --save_video out/result_plant.mp4

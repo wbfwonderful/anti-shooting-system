@@ -1,0 +1,867 @@
+
+/****============================== PageBodyTag.java中方法 =============================== *******/
+
+/**
+ * 初始化整体主页
+ */
+function initMain(){
+	//设置tilte,并设置是否关闭
+	var strTitle = document.getElementById('main_view_title'); 
+	var closeBut = document.getElementById('main_view_closeBut'); 
+	if(strTitle!=null && strTitle.value!=''){
+		var stView="<table border=\"0\" style=\"height:33px;\"><tr>";  
+		if(closeBut!=null && eval(closeBut.value)){
+			stView = stView + "<td><img border=\"0\" align='absmiddle' src=\""+this.basePath+"/framework/images/new/win_close_blue.png\" onclick=\"javascript:window.close();\" style=\"cursor:pointer;margin:0px;\"></td>"; 
+		}  
+		stView = stView + "<td>&nbsp;<font style=\"font-size:13px;\">"+strTitle.value+"</font></td></tr></table>"; 
+		$("#tag_mainView").panel({region:"center",title:stView});
+	}
+	
+	//查询栏和功能按钮栏是否显示
+	var tsIsview = false;
+	
+	//toolbar显示:在没有列表的页面，则toolbar独立显示，有列表的页面则toolbar需要加入到列表标签也显示  
+	var tshowView = document.getElementById('tag_tshowView'); 
+	if(tshowView!=null){
+		var toolHtml = $("#tag_toolbarView").html();
+		if(toolHtml!=""){
+			$("#tool_view").html(toolHtml);
+			$("#tag_toolbarView").html("");
+			$("#tag_toolbarView").remove();
+			tsIsview = true;
+		}
+	}else{
+		$("#tag_toolbarView").show();
+	}
+	 
+	//将查询html置入到查询栏中   
+	var tsView = document.getElementById('tmpSearchTableView');
+	if(tsView!=null){   
+		var sHtml = $('#tmpSearchTableView').html(); 
+		if(sHtml!=""){
+			$('#search_view').html(sHtml); 
+			$('#tmpSearchTableView').html("");
+			$('#tmpSearchTableView').remove(); 
+			tsIsview = true;
+		}
+	}
+	 
+	//数据表格初始化
+	var datatable = document.getElementById('dataTables'); 
+	if(datatable!=null){
+		var dataTotal = $('#dataTotal').val();
+		var pageSize = $('#pageSize').val();
+		var pageNum = $('#PageNum').val();
+		var totalPages = $('#totalPages').val();
+		var oPageSize = $('#oPageSize').val(); 
+	
+		initDatatables(dataTotal,pageSize,pageNum,totalPages,oPageSize,tsIsview); 
+	}   
+}
+
+
+
+
+/****============================== serachTableTag.java中方法 =============================== *******/
+
+/**
+** 初始化查询方法
+**/
+function initSearch(){  
+	var selectFields = $("#selectFields").val(); 
+	var valObj = document.getElementsByName("searchVal");
+	var serObj = document.getElementsByName("searchName"); 
+	for(var i=0;i<valObj.length;i++){
+		var val = valObj[i].value;
+		if(val!=null && val!=""){  
+			loadSearchValOper(serObj[i],i,selectFields,val); 
+		} 
+	}
+}
+
+
+/**
+** serachTableTag标签中选择查询列加载查询值列显示方法
+**/
+function loadSearchVal(obj,idx){
+	var selectFields = $("#selectFields").val(); 
+	loadSearchValOper(obj,idx,selectFields,"");
+}
+
+ 
+/**
+** serachTableTag标签中选择查询列加载查询值列显示方法
+*  以及BottomTag标签中批量修改列
+**/
+function loadSearchValOper(obj,idx,strFields,mrz){
+	
+	if(obj.value==""){
+		if(idx=="99"){ 
+			$("#searchDiv"+idx).html("<input id='ZdSzValue' name='ZdSzValue' type='text' style='width:100px'/>"); 
+		}else{
+			$("#searchDiv"+idx).html("<input name='searchVal' type='text' onkeydown='keydownSearch(event)' style='width:100px'/>"); 
+		} 
+		return;
+	}
+	
+	var searchName;   
+	if(idx=="99"){
+		searchName = obj.value;
+	}else{
+		searchName = obj.value.split(":")[0];
+	}  
+	var selectFields = strFields;
+	  
+	//判断当前searchName是否在selectFields中定义查询值  
+	if(selectFields.toUpperCase().indexOf(searchName.toUpperCase()+":")>-1){
+		var fields = selectFields.split("#");
+		for(var a=0;a<fields.length;a++){
+			if(!(fields[a].toUpperCase().indexOf(searchName.toUpperCase()+":")>-1)){
+				continue;
+			}
+			
+			//解析字符串(jzwflm:0:ZZDJZWFL:dm:dmmc:1=1 order by dm , j.zt:1:1|是$0|否, jj.zymc:2:myshowbj())
+			//第二位参数:0代表直接加载字典，1代表自定义字典，2自定选择字典
+			var field = fields[a].split(":");
+			if(field[1]=="0"){	//通过数据字典从后台加载的情况
+				//字符原型原型："jzwflm:0:ZZDJZWFL:dm:dmmc:1=1 order by dm"
+				if(field.length!=6){
+					continue;
+				} 
+				setValDbZd(field,idx,mrz);
+			}else if(field[1]=="1" && fields[a].indexOf("$")>-1){	//自定义下拉列表情况
+				//字符原型："j.zt:1:1|是$0|否"
+				if(field.length!=3){
+					continue;
+				} 
+				setValZd(field,idx,mrz); 
+			}else if(field[1]=="2" && idx=="99"){
+				//字符原型：jj.zymc:2:myshowbj('${pageContext.request.contextPath}','$id','$value','1')
+				setValFun(field,idx);
+			}else if(field[1]=="3"){
+				//字符原型：jj.zymc:2:myshowbj('${pageContext.request.contextPath}','$id','$value','1')
+				setDateFun(field,idx);
+			}
+		}
+	}else{
+		
+		if(idx=="99"){
+			$("#searchDiv"+idx).html("<input id='ZdSzValue' name='ZdSzValue' value='"+mrz+"' type='text' style='width:100px'/>"); 
+		}else{
+			$("#searchDiv"+idx).html("<input name='searchVal' onkeydown='keydownSearch(event)' type='text' value='"+mrz+"' style='width:100px'/>"); 
+		} 
+	}
+}
+
+//从后台数据库中获取数据设置列表
+function setValDbZd(fieldObj,idx,mrz){
+	//字符原型原型："jzwflm:0:ZZDJZWFL:dm:dmmc:1=1 order by dm" 
+	var tableName = fieldObj[2];
+	var valCol = fieldObj[3];
+	var nameCol = fieldObj[4];
+	var where = escapeForSpecial(fieldObj[5]);
+//	console.info(where);
+	$.ajax({
+		type: 'POST',
+	  	url: basePath+"/qzTag.do?method=getSearchZdList",
+	  	data:{
+			ptableName:tableName,
+			pvalCol:valCol,
+			pnameCol:nameCol,
+			pwhere:where
+	  	},
+	  	cache:false,
+	  	dataType:'json',
+	  	//contentType:"application/json;charset=utf-8",
+	  	async:false,  
+	  	success: function(rObj){
+	  		if(rObj.success){ 
+	  			var shtml;
+	  			if(idx=="99"){
+	  				shtml = "<select id='ZdSzValue' name='ZdSzValue' style='width:100px'>";
+	  			}else{
+	  				shtml = "<select name='searchVal' style='width:100px'>";
+	  			}
+				for(var a=0;a<rObj.dataList.length; a++){
+					var obj = rObj.dataList[a];
+					if(mrz==obj.dm){
+						shtml = shtml+"<option value=\""+obj.dm+"\" selected>"+obj.dmmc+"</option>";
+					}else{
+						shtml = shtml+"<option value=\""+obj.dm+"\">"+obj.dmmc+"</option>";
+					} 			
+				}
+				shtml = shtml+"</select>";
+				
+				$("#searchDiv"+idx).html(shtml);  
+	  		} 
+	  	}
+	}); 
+}
+
+
+//设置自定枚举列表
+function setValZd(fieldObj,idx,mrz){ 
+	
+	//字符原型："j.zt:1:1|是$0|否"
+	var vals = fieldObj[2].split("$");
+	var shtml;
+	if(idx=="99"){
+		shtml = "<select id='ZdSzValue' name='ZdSzValue' style='width:80px'>";
+	}else{
+		shtml = "<select name='searchVal' style='width:80px'>";
+	}
+	
+	for(var b=0;b<vals.length;b++){
+		var val = vals[b].split("|");
+		if(mrz==val[0]){ 
+			shtml = shtml+"<option value=\""+val[0]+"\" selected>"+val[1]+"</option>";
+		}else{
+			shtml = shtml+"<option value=\""+val[0]+"\">"+val[1]+"</option>";
+		}				
+	}
+	shtml = shtml+"</select>";
+	 
+	$("#searchDiv"+idx).html(shtml); 
+}
+
+//设置自定定义选择列表
+function setValFun(fieldObj,idx){ 
+	//字符原型：jj.zymc:2:myshowbj('${pageContext.request.contextPath}','$id','$value','1')
+	var strFun = fieldObj[2]; 
+	
+	var shtml="<input id='ZdSzValue' name='ZdSzValue' type='hidden'>" +
+			"<input id='ZdSzName' name='ZdSzName' type='text' style='width:100px'>" +
+			"&nbsp;<input type='button'  value='选择' class='button'  onclick="+strFun+">";  
+	
+	$("#searchDiv99").html(shtml); 
+}
+//设置日期选择文本框
+function setDateFun(fieldObj,idx){ 
+	//日期原型：qssj:3
+	var strFun = fieldObj[2]; 
+	
+	var shtml="<input id='ZdSzValue' name='ZdSzValue' onclick=\"SetDate(this,'yyyy-MM-dd',-290)\" type='text' style='width:100px'>";  
+	
+	$("#searchDiv99").html(shtml); 
+}
+ 
+function keydownSearch(evt){
+	var key = evt.keyCode?evt.keyCode:evt.which;
+	if(key==13){
+		searchOper();
+	}
+}
+//执行查询方法
+function searchOper(){
+	
+	//填了查询值，必须要选择查询字段名才能进行查询
+	var sNames = document.getElementsByName("searchName");  
+	var sVals = document.getElementsByName("searchVal");  
+	
+	for(var a=0;a<sVals.length;a++){
+		if(sVals[a].value!=null && sVals[a].value!=""){
+			if(sNames[a].value==null || sNames[a].value==""){
+				$.messager.alert("提示","提示：请选择需要查询的字段！");   
+				return false;
+			}
+		}
+	}  
+	
+//	$.messager.progress(); 
+	
+	openProgress();
+	
+	$("#Form1").submit();
+}
+
+
+
+
+/****============================== SmartList.java中方法 =============================== *******/
+  
+/*** 初始化datatables ****/
+
+var oTable;
+
+function initDatatables(tCnt,pSize,currPage,Totalp,oPsize,tsIsview){  
+	var tsHeight = 0;
+	if(tsIsview){
+		//显示查询And按钮功能栏
+		$("#toolAndSearchView").show(); 
+		tsHeight = $("#toolAndSearchView").height();   
+	} 
+	
+	//表格显示
+	$('#tag_tshowView').show();
+	
+	//获取主框架高度
+	var sh1 = $("#tag_mainView").height();  
+	    
+	//获取选中数据显示栏高度
+	var selObj = document.getElementById("select_datas_names");
+	var sh4 = 0;
+	if(selObj!=null){
+		sh4 = $("#select_datas_names").height(); 
+	}  
+	
+	//表格高度
+	var tableHeight = document.getElementById("tableHeight").value;
+	if(tableHeight=="" || tableHeight=="0" || tableHeight==0){
+		//可调整高度
+		var ktzHeight = document.getElementById("ktzHeight").value;
+		
+		//计算出表格显示的高度
+		tableHeight = parseFloat(sh1) - parseFloat(tsHeight) - parseFloat(sh4) - parseFloat(100) - parseFloat(ktzHeight); 
+	} 
+	
+	//不显示title的情况
+	var strTitle = document.getElementById('main_view_title');
+	if(strTitle==null || strTitle.value==""){
+		tableHeight = parseFloat(tableHeight)+25;
+	}
+	
+	//当前主体页面的宽度
+	var mwidth = $('#tag_mainView').width(); 
+	
+	//实际数据表格的宽度
+	var dwidth = $('#dtabwidth').val(); 
+	
+	//是否横向滚动条
+	var scrollx = $("#scrollx").val(); 
+	
+	if(scrollx==true || scrollx=="true"){
+//	if(dwidth>mwidth){	  
+		//有横向滚动条 
+		initDatatableOnScrollX(currPage,pSize,tCnt,tableHeight,dwidth);
+	}else{	  
+		//无横向滚动条
+		initDatatableOnNoScrollX(currPage,pSize,tCnt,tableHeight);
+	} 
+	
+	//打开子页面操作
+	$("#dataTables tbody td img").on('click', function (){   
+		var nTr = this.parentNode.parentNode;
+		if ( this.src.match('details_close') ){ 
+			this.src = basePath+"/framework/images/new/list/details_open.png";
+			oTable.fnClose( nTr );
+		}else{ 
+			this.src = basePath+"/framework/images/new/list/details_close.png";
+			oTable.fnOpen( nTr, fnFormatDetails(nTr,this.name),'details');
+		}
+	}); 
+	
+	//分页对象定义
+	var options = {
+		totalPages:Totalp,
+        currPage : currPage,
+        totalRows : tCnt,
+        optionsForRows : [parseInt(oPsize)*1,parseInt(oPsize)*2,parseInt(oPsize)*3,parseInt(oPsize)*4],
+        rowsPerPage :pSize, 
+        topNav : true
+	}; 
+	$('#dataTables').tablePagination(options); 
+	
+	//bottomTag显示
+	var bottomView = document.getElementById("tag_bottomView");
+	if(bottomView!=null){ 
+		$("#bottom_View").html($("#tag_bottomView").html()); 
+		$("#tag_bottomView").html("");
+		$("#tag_bottomView").remove();
+	}  
+	  
+	//右击弹出菜单实现
+/*	$("#dataTables tbody tr").unbind("mouserover");
+	$("#dataTables tbody tr").bind("mousedown",(function(e){  
+		$('#menuDiv').menu('show',{
+			left:e.pageX,
+			top:e.pageY
+		}); 
+		
+		//屏蔽网页右击菜单
+		e.preventDefault(); 
+	}));*/
+} 
+
+
+/**
+ * 初始化datatables带横向滚动条
+ * 
+ */
+function initDatatableOnScrollX(currPage,pSize,tCnt,sdh,dwidth){
+	oTable = $('#dataTables').dataTable({
+		"sDom": "<t><i>",
+		"sScrollY":sdh,
+		"sScrollX":dwidth,
+	//	"bScrollCollapse":true,
+		"bPaginate": true,    
+		"bLengthChange": true, 	
+		"bFilter": false, 	
+		"bSort": false, 	
+		"bInfo": true,	
+		"bAutoWidth": true,   
+		"iDisplayLength":pSize, 
+		"oLanguage":{ 
+            "sZeroRecords": "查询不到任何相关数据",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录" 
+        },
+        "fnInfoCallback": function(oSettings,iStart,iEnd,iMax,iTotal,sPre){ 
+        	var cend = currPage*pSize;
+        	if(parseInt(cend)>parseInt(tCnt)){
+        		cend = tCnt;
+        	} 
+        	
+        	//定义分页栏显示
+        	var thtml = "<table width=\"100%\" height=\"40px\" border='0'><tr><td><span id='bottom_View'></span></td>"; 
+        	thtml = thtml + "<td align='right' style=\"width:280px;\"><span id='paginationView'></span></td></tr></table>";
+        	
+        	return thtml;
+        }
+	}); 
+	
+}
+
+
+/**
+ * 初始化datatables不带横向滚动条
+ * 
+ */
+function initDatatableOnNoScrollX(currPage,pSize,tCnt,sdh){ 
+	oTable = $('#dataTables').dataTable({
+		"sDom": "<t><i>",
+		"sScrollY":sdh+"px", 
+//		"sScrollX":"100%", 
+//		"bScrollCollapse":false,
+		"bPaginate": true,    
+		"bLengthChange": true, 	
+		"bFilter": false, 	
+		"bSort": false, 	
+		"bInfo": true,	
+		"bAutoWidth": true,   
+		"iDisplayLength":pSize, 
+		"oLanguage":{ 
+            "sZeroRecords": "查询不到任何相关数据",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录" 
+        },
+        "fnInfoCallback": function(oSettings,iStart,iEnd,iMax,iTotal,sPre){ 
+        	var cend = currPage*pSize;
+        	if(parseInt(cend)>parseInt(tCnt)){
+        		cend = tCnt;
+        	} 
+        	
+        	//定义分页栏显示
+        	var thtml = "<table width=\"100%\" height=\"40px\" border='0' ><tr><td><span id='bottom_View'></span></td>"; 
+        	thtml = thtml + "<td align='right'><span id='paginationView'></span></td></tr></table>";
+        	
+        	return thtml;
+        }
+	}); 
+}
+
+
+//子表格页面
+function fnFormatDetails(nTr,url){
+ //   var aData = oTable.fnGetData(nTr);
+    var src = basePath + url; 
+    var sOut = '<table cellpadding="1" cellspacing="0" border="0" style="padding-left:50px;width:100%;height:200px;background-color:white;">';
+    sOut += '<tr><td><iframe height="330px" width="100%" src="'+url+'" frameborder="0" style="border:0px;" > </iframe></td></tr>';
+    sOut += '</table>'; 
+    return sOut;
+}
+
+
+
+
+/********************* checkBox选中不选中方法绑定 ************************/ 
+/**
+ * 页面上列表头上checkbox选择方法
+ */
+function selectAllFun(obj){
+	//获取当前所有的列表
+	var cBoxObj = document.getElementsByName("C_Select"); 
+	for(var i=0;i<cBoxObj.length;i++){ 
+		if(cBoxObj[i].disabled){
+			continue;
+		}
+		
+		if(obj.checked){
+			cBoxObj[i].checked = true; 
+		}else{
+			cBoxObj[i].checked = false; 
+		} 
+		selectData(cBoxObj[i]);
+	} 
+} 
+
+var checkids = new Array();
+var checkNames = new Array();
+
+function addCheckids(id){
+	var isadd = true;
+	for(var b=0;b<checkids.length;b++){
+		if(checkids[b]==id){
+			isadd = false;
+			break;
+		}
+	}
+	if(isadd){
+		checkids[checkids.length] = id;
+	}
+}
+
+
+function addCheckNames(name){
+	var isadd = true;
+	for(var b=0;b<checkNames.length;b++){
+		if(checkNames[b]==name){
+			isadd = false;
+			break;
+		}
+	}
+	if(isadd){
+		checkNames[checkNames.length] = name;
+	}
+}
+
+
+/**
+ * 初始化已选择的数据
+ * 
+ * @param obj
+ */
+function initOldDatas(old_ids,old_names) { 
+	initSelectFun(old_ids,old_names);
+}
+
+ 
+/**
+ * checkbox单击事件调用方法
+ * 
+ * @param obj
+ */
+function selectData(obj){ 
+	//只有选中的情况才进行数据处理
+	if(obj.checked){ 
+		var isAdd = true;
+		for(var i=0;i<checkids.length;i++) {  
+			if(obj.value.split(",")[0] == checkids[i]){ 
+				isAdd = false;
+				break;
+			} 
+		}  
+		
+		if(isAdd){
+			addCheckids(obj.value.split(",")[0]);
+			addCheckNames(obj.value.split(",")[1]); 
+		}
+		//页面选择信息重新显示
+		setSelectVal();
+		setSeletView();
+		 
+	}else{				//未选中情况
+		for(var i=0;i<checkids.length;i++) {  
+			if(obj.value.split(",")[0] == checkids[i]){ 
+				checkids.remove(i);
+				break;
+			} 
+		} 
+		
+		for(var j=0;j<checkNames.length;j++) {  
+			if(obj.value.split(",")[1] == checkNames[j]){ 
+				checkNames.remove(j);
+				break;
+			} 
+		}
+		
+		//页面选择信息重新显示
+		setSelectVal();
+		setSeletView(); 
+	} 
+} 
+
+//设置选择数据显示及放置在表单中
+function setSeletView(){
+	var vName = "";
+	for(var j=0;j<checkNames.length;j++) {  
+		if(vName==""){
+			vName = checkNames[j];
+		}else{
+			vName = vName +","+checkNames[j];
+		} 
+	}
+	if(vName==""){
+		$("#select_datas_names").html("<font color='red'>&nbsp;</font>");  
+	}else{
+		if(vName != "undefined" && vName != undefined){
+			$("#select_datas_names").html("<font color='red'>"+vName+"</font>"); 
+		}
+		
+	}  
+	$("#check_object_name").val(vName);  
+	
+}
+
+//设置选择数据显示
+function setSelectVal(){ 
+	var ids = "";
+	for(var a=0;a<checkids.length;a++) {  
+		if(ids==""){
+			ids = checkids[a];
+		}else{
+			ids = ids +","+checkids[a];
+		} 
+	}   
+	$("#check_object_id").val(ids); 
+} 
+ 
+//初始化已选择的数据
+function initSelectFun(ids,names){  
+	if(ids!=null && ids!=""){ 
+		var idsObj = ids.split(",");
+		for(var a=0;a<idsObj.length;a++){ 
+			addCheckids(idsObj[a]); 
+		}
+		
+		//设置checkBox选中
+		var cBoxObj = document.getElementsByName("C_Select");
+		 
+		for(var i=0;i<cBoxObj.length;i++){
+			var cValue = cBoxObj[i].value; 
+			for(var j=0;j<idsObj.length;j++){
+				if(idsObj[j]==cValue.split(",")[0]){
+					cBoxObj[i].checked=true;
+					$(cBoxObj[i]).parents("tr").css("background-color", "#66CCFF");
+					break;
+				}
+			} 
+		} 
+		$("#check_object_id").val(ids); 
+	}
+	
+	if(names!=null && names!=""){
+		var namesObj = names.split(",");
+		for(var b=0;b<namesObj.length;b++){  
+			addCheckNames(namesObj[b]);
+		}
+		$("#select_datas_names").html("<font color='red'>"+names+"</font>"); 
+		
+		$("#check_object_name").val(names); 
+	}  
+}
+/***********************************************************************************************/ 
+
+
+//主页重新加载
+function reloadPageOnFy(pageNum,pageSize){ 
+	if(pageNum!=null && pageNum!="" ){ 
+		$("#PageNum").val(pageNum);
+	} 
+	
+	if(pageSize!=null && pageSize!="" ){ 
+		$("#pageSize").val(pageSize);
+	}
+	
+//	$.messager.progress();
+	openProgress();
+	
+	$("#Form1").submit();
+} 
+
+
+function reloadPageOnPx(OrderField,OrderTpye){  
+	if(OrderField!=null && OrderField!="" 
+				&& OrderTpye!=null && OrderTpye!=""){ 
+		$("#OrderField").val(OrderField);
+		$("#OrderTpye").val(OrderTpye);
+		$("#OrderBy").val(OrderField+" "+OrderTpye);
+	}   
+//	$.messager.progress(); 
+	
+	openProgress();
+	
+	$("#Form1").submit();
+}
+
+
+/**
+ * 右击菜单初始化
+ * 
+ */
+function initRightMenu(){ 
+	$("#dataTables tbody tr").each(function(trindex,tritem){//遍历每一行
+		$('#dataTables tbody tr:eq('+trindex+')').contextMenu('rigthMenu'+trindex,{}); 
+	});
+}
+
+
+/**
+ * 打开自动义表格显示页面
+ * 
+ */
+function setDatatablesView(){
+	
+	var leftSel = $("#dxselect"); 
+	var rightSel = $("#yxselect"); 
+	
+	$("#toright").bind("click",function(){         
+	    leftSel.find("option:selected").each(function(){ 
+	        $(this).remove().appendTo(rightSel); 
+	    }); 
+	}); 
+	
+	
+	$("#toleft").bind("click",function(){         
+	    rightSel.find("option:selected").each(function(){ 
+	        $(this).remove().appendTo(leftSel); 
+	    }); 
+	}); 
+	
+	leftSel.dblclick(function(){ 
+	    $(this).find("option:selected").each(function(){ 
+	        $(this).remove().appendTo(rightSel); 
+	    }); 
+	}); 
+	
+	rightSel.dblclick(function(){ 
+	    $(this).find("option:selected").each(function(){ 
+	        $(this).remove().appendTo(leftSel); 
+	    }); 
+	}); 
+	
+	
+	$("#toup").bind("click",function(){   
+		var obj = document.getElementById("yxselect"); 
+		
+		//最上面的一个不需要移动，所以直接从i=1开始  
+	    for(var i=1; i < obj.length; i++){
+	    	if(obj.options[i].selected){  
+	    		if(!obj.options.item(i-1).selected){  
+	    			var selText = obj.options[i].text;  
+	    			var selValue = obj.options[i].value;  
+	    			obj.options[i].text = obj.options[i-1].text;  
+	    			obj.options[i].value = obj.options[i-1].value;  
+	    			obj.options[i].selected = false;  
+	    			obj.options[i-1].text = selText;  
+	    			obj.options[i-1].value = selValue;  
+	    			obj.options[i-1].selected=true;  
+	    		}  
+	    	}  
+	    }   
+	}); 
+	
+	
+	$("#todown").bind("click",function(){
+		var obj = document.getElementById("yxselect"); 
+		
+		//向下移动，最后一个不需要处理，所以直接从倒数第二个开始  
+		for(var i = obj.length -2 ; i >= 0; i--){
+			if(obj.options[i].selected){  
+				if(!obj.options[i+1].selected){  
+					var selText = obj.options[i].text;  
+					var selValue = obj.options[i].value;  
+					obj.options[i].text = obj.options[i+1].text;  
+					obj.options[i].value = obj.options[i+1].value;  
+					obj.options[i].selected = false;  
+					obj.options[i+1].text = selText;  
+					obj.options[i+1].value = selValue;  
+					obj.options[i+1].selected=true;  
+				}  
+			}  
+		}  
+	}); 
+	
+	$('#cloum_disply').window('close');
+} 
+
+
+/**
+ * 保存自定义列设置
+ * 
+ */
+function saveSetCol(){
+	
+	//是否设置列提交标事
+	$("#isSetCol").val("true");
+	
+	var dxselectStr="";
+	var yxselectStr="";
+	    
+	$("#dxselect").find("option").each(function(){
+		if(dxselectStr==""){
+			dxselectStr = $(this).val();
+		}else{
+			dxselectStr = dxselectStr+","+$(this).val(); 
+		} 
+	});
+	
+	$("#yxselect").find("option").each(function(){ 
+		if(yxselectStr==""){
+			yxselectStr = $(this).val();
+		}else{
+			yxselectStr = yxselectStr+","+$(this).val();
+		} 
+	}); 
+	
+	$("#dxselectStr").val(dxselectStr);
+	$("#yxselectStr").val(yxselectStr);
+	
+//	$.messager.progress(); 
+	
+	openProgress();
+	
+	$("#Form1").submit(); 
+}
+ 
+
+/****============================== BottomTag.java中方法 =============================== *******/
+
+/**
+** BottomTag标签中批量修改列加载
+**/
+function modColumLoad(obj){ 
+	var selectFields = $("#modSelectFields").val();  
+	loadSearchValOper(obj,"99",selectFields,"");
+}
+
+//特殊字符替换规则
+var specialCode = { 'CNM':'**',
+					'fuck':'**',
+					'&':'&amp;',
+					';':'&#59;',
+					'<':'&lt;',
+					'>':'&gt;',
+					'exec':'&#101;xec',
+					'xp_cmdshell':'&#120;p_cmdshell',
+					'select':'&#115;elect',
+					'insert':'&#105;nsert',
+					'update':'&#117;pdate',
+					'delete':'&#100;elete',
+					'drop':'&#100;rop',
+					'create':'&#99;reate',
+					'rename':'&#114;ename',
+					'truncate':'&#116;runcate',
+					'alter':'&#97;lter',
+					'exists':'&#101;xists',
+					'master.':'&#109;aster.',
+					'restore':'&#114;estore',
+					'from':'&#102;rom',
+					'where':'&#119;here',
+					'and':'&#97;nd',
+					'union':'&#117;nion',
+					'grant':'&#103;rant',
+					'like':'&#108;ike',
+					'or':'&#111;r'
+}
+
+//替换特殊字符，因特殊字符传递时，还未经过公司的特殊字符过滤器，就被学校防火墙给拦截了，所以这里在传参之前就处理特殊字符
+function escapeForSpecial(str) {
+	if (str != "" && str != undefined) {
+		for (var prop in specialCode) {
+			str = str.replace(new RegExp(prop, 'g'), specialCode[prop]);
+		}
+	}
+	return str;
+}
+	
+
+
+

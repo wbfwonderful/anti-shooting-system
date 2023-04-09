@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>encode upload</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        选择文件 {{ form.file }} <br>
+        输入水印信息 {{ form.msg }}
+        {{ form.submit }}
+    </form>
+</body>
+</html>

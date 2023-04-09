@@ -1,0 +1,902 @@
+
+// Provide a default path to dwr.engine
+if (dwr == null) var dwr = {};
+if (dwr.engine == null) dwr.engine = {};
+if (DWREngine == null) var DWREngine = dwr.engine;
+
+if (dwrMonitor == null) var dwrMonitor = {};
+dwrMonitor._path = '/dwr';
+dwrMonitor.emptyMap = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'emptyMap', p0, callback);
+}
+dwrMonitor.getJx01nd = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getJx01nd', p0, p1, callback);
+}
+dwrMonitor.getBj = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getBj', p0, callback);
+}
+dwrMonitor.queryXs = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'queryXs', callback);
+}
+dwrMonitor.checkIsOnlyXs11Shpc = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXs11Shpc', p0, p1, callback);
+}
+dwrMonitor.orderbyjx0601 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'orderbyjx0601', p0, callback);
+}
+dwrMonitor.orderbyjg0101 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'orderbyjg0101', p0, callback);
+}
+dwrMonitor.ldLoadOper = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'ldLoadOper', p0, p1, callback);
+}
+dwrMonitor.getZdxs = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getZdxs', p0, callback);
+}
+dwrMonitor.getDataListForArray2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray2', p0, callback);
+}
+dwrMonitor.getforsj = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getforsj', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDtreeBeanlist_fuce = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDtreeBeanlist_fuce', p0, callback);
+}
+dwrMonitor.getFrmtipsByuserId = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getFrmtipsByuserId', callback);
+}
+dwrMonitor.setSearchBaseBean = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'setSearchBaseBean', p0, p1, callback);
+}
+dwrMonitor.getSearchValue = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getSearchValue', callback);
+}
+dwrMonitor.checkJx0502 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkJx0502', p0, p1, callback);
+}
+dwrMonitor.checkJx0502zb = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkJx0502zb', p0, p1, p2, callback);
+}
+dwrMonitor.getJx02sxById = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getJx02sxById', p0, p1, callback);
+}
+dwrMonitor.checkxksjForzb = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkxksjForzb', p0, p1, p2, p3, callback);
+}
+dwrMonitor.findKczmcByxs = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findKczmcByxs', p0, p1, callback);
+}
+dwrMonitor.findKcmcOfKCZ = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findKcmcOfKCZ', p0, p1, p2, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql', p0, callback);
+}
+dwrMonitor.findInitXnxq = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findInitXnxq', callback);
+}
+dwrMonitor.findXklbOfUser = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findXklbOfUser', p0, callback);
+}
+dwrMonitor.findPjXnxqOfUser = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findPjXnxqOfUser', p0, callback);
+}
+dwrMonitor.findPjPcOfUser = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findPjPcOfUser', p0, callback);
+}
+dwrMonitor.findPj0401OfXnxq = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findPj0401OfXnxq', p0, callback);
+}
+dwrMonitor.findPj0401jsOfXnxq = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findPj0401jsOfXnxq', p0, callback);
+}
+dwrMonitor.findJx02OfCj0708 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findJx02OfCj0708', p0, p1, p2, p3, callback);
+}
+dwrMonitor.findCj0711ByShxq = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findCj0711ByShxq', p0, p1, callback);
+}
+dwrMonitor.findCj0709ByJx02ID = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findCj0709ByJx02ID', p0, callback);
+}
+dwrMonitor.checkTimeOfpc = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkTimeOfpc', p0, callback);
+}
+dwrMonitor.checkJdMiss = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkJdMiss', p0, p1, p2, callback);
+}
+dwrMonitor.getXX0301xx = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getXX0301xx', p0, p1, p2, callback);
+}
+dwrMonitor.findCjlrkz = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findCjlrkz', p0, callback);
+}
+dwrMonitor.findlhkm = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findlhkm', p0, callback);
+}
+dwrMonitor.findXsdwByJx0404id = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findXsdwByJx0404id', p0, p1, callback);
+}
+dwrMonitor.getZZDXSHS = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getZZDXSHS', callback);
+}
+dwrMonitor.getXsMsg = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getXsMsg', p0, callback);
+}
+dwrMonitor.getJxjhMsg = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getJxjhMsg', p0, callback);
+}
+dwrMonitor.getZzdDjmc = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getZzdDjmc', callback);
+}
+dwrMonitor.checkIsHaveOfCj0711 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsHaveOfCj0711', p0, p1, callback);
+}
+dwrMonitor.findXsCxMsg = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findXsCxMsg', p0, p1, p2, callback);
+}
+dwrMonitor.findXsCxMsgKszx = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findXsCxMsgKszx', p0, p1, p2, callback);
+}
+dwrMonitor.checkXflb = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkXflb', p0, callback);
+}
+dwrMonitor.uniqueCheck_jcxm = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'uniqueCheck_jcxm', p0, callback);
+}
+dwrMonitor.jclxCheck = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'jclxCheck', p0, callback);
+}
+dwrMonitor.hjjbCheck = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'hjjbCheck', p0, callback);
+}
+dwrMonitor.jcbcCheck = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'jcbcCheck', p0, callback);
+}
+dwrMonitor.getCbsMsg = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getCbsMsg', p0, callback);
+}
+dwrMonitor.CheckRdxmXx = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'CheckRdxmXx', p0, p1, callback);
+}
+dwrMonitor.getZyTwo = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getZyTwo', p0, p1, p2, callback);
+}
+dwrMonitor.findJcxyDqxq = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findJcxyDqxq', callback);
+}
+dwrMonitor.savekcsx = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'savekcsx', p0, p1, callback);
+}
+dwrMonitor.checkCbs = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkCbs', p0, callback);
+}
+dwrMonitor.checkUniqueXmlb = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkUniqueXmlb', p0, p1, p2, p3, callback);
+}
+dwrMonitor.checkSqms = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkSqms', p0, callback);
+}
+dwrMonitor.getZyflDqXnxq = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getZyflDqXnxq', callback);
+}
+dwrMonitor.getXyDx = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getXyDx', p0, p1, p2, callback);
+}
+dwrMonitor.getjx0405kyzc = function(p0, p1, p2, p3, p4, p5, p6, p7, p8, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getjx0405kyzc', p0, p1, p2, p3, p4, p5, p6, p7, p8, callback);
+}
+dwrMonitor.chxxs0101id = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'chxxs0101id', p0, callback);
+}
+dwrMonitor.findSqpc = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findSqpc', p0, p1, callback);
+}
+dwrMonitor.findZzzlx = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'findZzzlx', p0, callback);
+}
+dwrMonitor.getZy2 = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getZy2', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.checkIsOnlyAllXnxq = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllXnxq', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_jxnd = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd', p0, callback);
+}
+dwrMonitor.getDataList_jxnd1 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd1', p0, p1, p2, callback);
+}
+dwrMonitor.checkIsOnlyFrmfcell = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyFrmfcell', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyGgl = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyGgl', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyGgly = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyGgly', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyFrmr = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyFrmr', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyFrmro = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyFrmro', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyfrmu = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyfrmu', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyjg = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyjg', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyjg01 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyjg01', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXx = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXx', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx06 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx06', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx060 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx060', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXx01 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXx01', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx04 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx04', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyzc = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyzc', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyzc02 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyzc02', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXx03 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXx03', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXsf = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXsf', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyaa = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyaa', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx02 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx02', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx02kcmc = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx02kcmc', p0, p1, p2, callback);
+}
+dwrMonitor.checkIsOnlySj11 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj11', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySj = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyCj07 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyCj07', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlycjrd = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlycjrd', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyCj070 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyCj070', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx02new = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx02new', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx02new01 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx02new01', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJ1 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJ1', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJy = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJy', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJc = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJc', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJc01 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJc01', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJck = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJck', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJc010 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJc010', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJc0102 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJc0102', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJck03 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJck03', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJcbh = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJcbh', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJcmc = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJcmc', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyNew = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyNew', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySk = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySk', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySkd = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySkd', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySkk = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySkk', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx041 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx041', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyKw = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyKw', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyJx030 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyJx030', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySj03 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj03', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySj030 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj030', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySj0306 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj0306', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySj0301 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj0301', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlySj0605 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlySj0605', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXs11 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXs11', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXs11_s = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXs11_s', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyBy = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyBy', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyFxBy = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyFxBy', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyZzd = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyZzd', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyXj = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyXj', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyZdb = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyZdb', p0, p1, p2, callback);
+}
+dwrMonitor.getObjectById_Frm = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Frm', p0, callback);
+}
+dwrMonitor.getObjectById_Frmu = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Frmu', p0, callback);
+}
+dwrMonitor.getObjectById_Jg01 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Jg01', p0, callback);
+}
+dwrMonitor.getObjectById_Xs01 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Xs01', p0, callback);
+}
+dwrMonitor.getObjectById_Zzdx = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Zzdx', p0, callback);
+}
+dwrMonitor.getObjectById_Jx02 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Jx02', p0, callback);
+}
+dwrMonitor.getObjectById_Jx01 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Jx01', p0, callback);
+}
+dwrMonitor.getObjectById_Xx03 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Xx03', p0, callback);
+}
+dwrMonitor.getObjectById_Jx06 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Jx06', p0, callback);
+}
+dwrMonitor.getObjectById_Jx0405 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getObjectById_Jx0405', p0, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Jg01 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Jg01', p0, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Sj04 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Sj04', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Jx02 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Jx02', p0, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Zzd = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Zzd', p0, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Cj07 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Cj07', p0, p1, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Jls = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Jls', p0, callback);
+}
+dwrMonitor.checkIsOnlyAllBySql_Frmu = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkIsOnlyAllBySql_Frmu', p0, callback);
+}
+dwrMonitor.getDataListForArray_Jx02 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray_Jx02', p0, p1, p2, callback);
+}
+dwrMonitor.getDataListForArray_Xx03 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray_Xx03', p0, p1, callback);
+}
+dwrMonitor.getDataListForArray_Xx0301 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray_Xx0301', p0, callback);
+}
+dwrMonitor.getDataListForArray_Xx = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray_Xx', callback);
+}
+dwrMonitor.getDataListForArray_Jx01 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray_Jx01', p0, callback);
+}
+dwrMonitor.getDataListForArray_Jx01nd = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataListForArray_Jx01nd', p0, callback);
+}
+dwrMonitor.getDataList_cj0720 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_cj0720', callback);
+}
+dwrMonitor.getDataList_Xkjs01 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xkjs01', p0, p1, callback);
+}
+dwrMonitor.getDataList_Xkjs03 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xkjs03', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_xs0101 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xs0101', p0, callback);
+}
+dwrMonitor.getDataList_jg0101 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jg0101', p0, callback);
+}
+dwrMonitor.getDataList_xs0703zbf = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xs0703zbf', callback);
+}
+dwrMonitor.getDataList_skdj = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj', p0, callback);
+}
+dwrMonitor.getDataList_ShTjzb = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_ShTjzb', p0, callback);
+}
+dwrMonitor.getDataList_Xsyjjsdx = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xsyjjsdx', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_mana = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_mana', p0, callback);
+}
+dwrMonitor.getDataList_mana2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_mana2', p0, callback);
+}
+dwrMonitor.getDataList_mana3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_mana3', p0, callback);
+}
+dwrMonitor.getDataList_Xjyj01 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xjyj01', p0, callback);
+}
+dwrMonitor.getDataList_Xsyjjsdx1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xsyjjsdx1', p0, callback);
+}
+dwrMonitor.getDataList_xs0702 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xs0702', p0, callback);
+}
+dwrMonitor.getDataList_YDKZLB = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_YDKZLB', callback);
+}
+dwrMonitor.getDataList_ggsjfwkz = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_ggsjfwkz', callback);
+}
+dwrMonitor.getDataList_xs0703zb = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xs0703zb', callback);
+}
+dwrMonitor.getDataList_Pj1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Pj1', p0, callback);
+}
+dwrMonitor.getDataList_Pj2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Pj2', p0, callback);
+}
+dwrMonitor.getDataList_xx1 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx1', callback);
+}
+dwrMonitor.getDataList_sj0607 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_sj0607', p0, callback);
+}
+dwrMonitor.getDataList_zzdcjbs = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zzdcjbs', p0, callback);
+}
+dwrMonitor.getDataList_Sj1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj1', p0, callback);
+}
+dwrMonitor.getDataList_Sj2 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj2', p0, p1, callback);
+}
+dwrMonitor.getDataList_Sj3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj3', p0, callback);
+}
+dwrMonitor.getDataList_Sj4 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj4', p0, callback);
+}
+dwrMonitor.getDataList_Sj5 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj5', p0, p1, callback);
+}
+dwrMonitor.getDataList_Sj6 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj6', p0, callback);
+}
+dwrMonitor.getDataList_Sj7 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj7', p0, callback);
+}
+dwrMonitor.getDataList_Sj8 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj8', p0, callback);
+}
+dwrMonitor.getDataList_Sj9 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj9', p0, p1, callback);
+}
+dwrMonitor.getDataList_KCTX = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_KCTX', p0, callback);
+}
+dwrMonitor.getDataList_Jx02sx = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Jx02sx', p0, callback);
+}
+dwrMonitor.getDataList_KCMKKC = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_KCMKKC', p0, p1, callback);
+}
+dwrMonitor.getDataList_zdjh1 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zdjh1', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_zdjh2 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zdjh2', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_zdjh3 = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zdjh3', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getDataList_zdjh4 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zdjh4', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_zdjh5 = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zdjh5', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getDataList_zdjh6 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_zdjh6', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_Zc0201 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Zc0201', p0, callback);
+}
+dwrMonitor.getDataList_Kw1 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw1', p0, p1, callback);
+}
+dwrMonitor.getDataList_Kw2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw2', p0, callback);
+}
+dwrMonitor.getDataList_Kw3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw3', p0, callback);
+}
+dwrMonitor.getDataList_Kw4 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw4', p0, p1, callback);
+}
+dwrMonitor.getDataList_Kw5 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw5', p0, callback);
+}
+dwrMonitor.getDataList_Zc1 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Zc1', callback);
+}
+dwrMonitor.getDataList_Kw6 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw6', callback);
+}
+dwrMonitor.getDataList_Zc2 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Zc2', p0, p1, callback);
+}
+dwrMonitor.getDataList_Kw7 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw7', p0, callback);
+}
+dwrMonitor.getDataList_jg1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jg1', p0, callback);
+}
+dwrMonitor.getDataList_skdj1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj1', p0, callback);
+}
+dwrMonitor.getDataList_skdj2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj2', p0, callback);
+}
+dwrMonitor.getDataList_skdj3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj3', p0, callback);
+}
+dwrMonitor.getDataList_Xx0301 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xx0301', p0, callback);
+}
+dwrMonitor.getDataList_skdj4 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj4', p0, callback);
+}
+dwrMonitor.getDataList_skdj5 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj5', p0, callback);
+}
+dwrMonitor.getDataList_skdj6 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_skdj6', p0, callback);
+}
+dwrMonitor.getDataList_pj3 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj3', p0, p1, callback);
+}
+dwrMonitor.getDataList_pj4 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj4', p0, p1, callback);
+}
+dwrMonitor.getDataList_xx2 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx2', callback);
+}
+dwrMonitor.getDataList_pj5 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj5', p0, p1, callback);
+}
+dwrMonitor.getDataList_pj6 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj6', p0, callback);
+}
+dwrMonitor.getDataList_pj7 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj7', p0, callback);
+}
+dwrMonitor.getDataList_pj8 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj8', p0, callback);
+}
+dwrMonitor.getDataList_pj9 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj9', p0, callback);
+}
+dwrMonitor.getDataList_pj10 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj10', p0, callback);
+}
+dwrMonitor.getDataList_pjhztj = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pjhztj', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_pjhztj1 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pjhztj1', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_pj11 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj11', p0, callback);
+}
+dwrMonitor.getDataList_pj12 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj12', p0, callback);
+}
+dwrMonitor.getDataList_pj13 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj13', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_pj14 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj14', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_Skjh = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Skjh', callback);
+}
+dwrMonitor.getDataList_jck = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jck', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_Sj1101 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj1101', callback);
+}
+dwrMonitor.getDataList_jg2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jg2', p0, callback);
+}
+dwrMonitor.getDataList_sj1107 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_sj1107', p0, callback);
+}
+dwrMonitor.getDataList_Jx0601 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Jx0601', p0, callback);
+}
+dwrMonitor.getDataList_Cj0717 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Cj0717', callback);
+}
+dwrMonitor.getDataList_Cj0715 = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Cj0715', callback);
+}
+dwrMonitor.getDataList_xx3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx3', p0, callback);
+}
+dwrMonitor.getDataList_xx4 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx4', p0, p1, callback);
+}
+dwrMonitor.getlistgxjh = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getlistgxjh', p0, callback);
+}
+dwrMonitor.getDataList_jxnd2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd2', p0, callback);
+}
+dwrMonitor.getDataList_jxnd3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd3', p0, callback);
+}
+dwrMonitor.getDataList_jxnd4 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd4', p0, callback);
+}
+dwrMonitor.getDataList_jxnd5 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd5', p0, callback);
+}
+dwrMonitor.getDataList_jx0401 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx0401', p0, callback);
+}
+dwrMonitor.getDataList_sj0301 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_sj0301', p0, callback);
+}
+dwrMonitor.getDataList_jxnd6 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxnd6', p0, p1, callback);
+}
+dwrMonitor.getDataList_jx1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx1', p0, callback);
+}
+dwrMonitor.getDataList_jx2 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx2', p0, callback);
+}
+dwrMonitor.getDataList_yxzy = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_yxzy', p0, p1, callback);
+}
+dwrMonitor.getDataList_xx5 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx5', p0, callback);
+}
+dwrMonitor.getDataList_jxjcfh = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxjcfh', callback);
+}
+dwrMonitor.getDataList_Xsyjjsdx2 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xsyjjsdx2', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_xx6 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx6', p0, callback);
+}
+dwrMonitor.getDataList_jg3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jg3', p0, callback);
+}
+dwrMonitor.getDataList_jx0407 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx0407', p0, callback);
+}
+dwrMonitor.getDataList_jx0405 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx0405', p0, callback);
+}
+dwrMonitor.getDataList_jx0408 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx0408', p0, callback);
+}
+dwrMonitor.getdatalist_jxkc1 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getdatalist_jxkc1', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getdatalist_jxkc2 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getdatalist_jxkc2', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getdatalist_jxkc3 = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getdatalist_jxkc3', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getdatalist_jxkc4 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getdatalist_jxkc4', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getdatalist_jxkc5 = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getdatalist_jxkc5', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getDataList_Zc3 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Zc3', p0, p1, callback);
+}
+dwrMonitor.getDataList_jx3 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx3', p0, callback);
+}
+dwrMonitor.getDataList_Kw8 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Kw8', p0, callback);
+}
+dwrMonitor.getDataList_jx4 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx4', p0, callback);
+}
+dwrMonitor.getDataList_jx5 = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx5', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_jx6 = function(p0, p1, p2, p3, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx6', p0, p1, p2, p3, callback);
+}
+dwrMonitor.getDataList_jxDataByXqGnqJxl = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jxDataByXqGnqJxl', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_jg4 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jg4', p0, callback);
+}
+dwrMonitor.getDataList_jx7 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx7', p0, callback);
+}
+dwrMonitor.getDataList_pjhztj2 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pjhztj2', p0, p1, callback);
+}
+dwrMonitor.getDataList_xx7 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx7', p0, callback);
+}
+dwrMonitor.getDataList_pj15 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_pj15', p0, callback);
+}
+dwrMonitor.getDataList_dxzqh = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dxzqh', p0, p1, callback);
+}
+dwrMonitor.getDataList_dxzqh1 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dxzqh1', p0, callback);
+}
+dwrMonitor.getDataList_dbzkzy = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dbzkzy', p0, p1, callback);
+}
+dwrMonitor.getDataList_dbzkzy1 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dbzkzy1', p0, p1, callback);
+}
+dwrMonitor.getDataList_xx8 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_xx8', p0, callback);
+}
+dwrMonitor.getDataList_dtaxx04 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaxx04', p0, p1, callback);
+}
+dwrMonitor.getDataList_dtaXx0301 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaXx0301', p0, callback);
+}
+dwrMonitor.getDataList_dtazdjxjh = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtazdjxjh', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getDataList_dtazdjxjh2 = function(p0, p1, p2, p3, p4, p5, p6, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtazdjxjh2', p0, p1, p2, p3, p4, p5, p6, callback);
+}
+dwrMonitor.getDataList_dtazdjxjh3 = function(p0, p1, p2, p3, p4, p5, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtazdjxjh3', p0, p1, p2, p3, p4, p5, callback);
+}
+dwrMonitor.getDataList_jx02kczkc = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx02kczkc', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getDataList_dtaKW0412 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaKW0412', p0, p1, callback);
+}
+dwrMonitor.getDataList_dtakw0405 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtakw0405', p0, callback);
+}
+dwrMonitor.getDataList_dtaKBJCSJ = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaKBJCSJ', p0, p1, p2, callback);
+}
+dwrMonitor.getDataList_dtaPjhztj1 = function(p0, p1, p2, p3, p4, p5, p6, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaPjhztj1', p0, p1, p2, p3, p4, p5, p6, callback);
+}
+dwrMonitor.getDataList_dtaPjhztj2 = function(p0, p1, p2, p3, p4, p5, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaPjhztj2', p0, p1, p2, p3, p4, p5, callback);
+}
+dwrMonitor.getDataList_dtaXX03012 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtaXX03012', p0, callback);
+}
+dwrMonitor.getDataList_dtatable = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_dtatable', p0, p1, callback);
+}
+dwrMonitor.getDataList_Sj01 = function(p0, p1, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Sj01', p0, p1, callback);
+}
+dwrMonitor.getDataList_jx04081 = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_jx04081', p0, callback);
+}
+dwrMonitor.getDataList_Xm04jlsj = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_Xm04jlsj', p0, callback);
+}
+dwrMonitor.getDataList_StuInfo = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getDataList_StuInfo', p0, callback);
+}
+dwrMonitor.getYxByXm02id = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getYxByXm02id', p0, callback);
+}
+dwrMonitor.checkzt = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'checkzt', callback);
+}
+dwrMonitor.getfxxsxx = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getfxxsxx', p0, callback);
+}
+dwrMonitor.dxmc = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'dxmc', p0, callback);
+}
+dwrMonitor.dateControl = function(p0, p1, p2, p3, p4, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'dateControl', p0, p1, p2, p3, p4, callback);
+}
+dwrMonitor.getCourseMessage = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getCourseMessage', p0, callback);
+}
+dwrMonitor.getWlkcxx = function(callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getWlkcxx', callback);
+}
+dwrMonitor.queryXs0101id = function(p0, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'queryXs0101id', p0, callback);
+}
+dwrMonitor.getYclxssl = function(p0, p1, p2, callback) {
+  dwr.engine._execute(dwrMonitor._path, 'dwrMonitor', 'getYclxssl', p0, p1, p2, callback);
+}
