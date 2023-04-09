@@ -32,25 +32,25 @@
 
 - file -> settings -> Project，右边选择 Python Interpreter
 
-  ![image-20230406200457094](D:\pycharm-workspace\flaskStegaStamp\README.assets\image-20230406200457094.png)
+  ![image-20230406200457094](README.assets\image-20230406200457094.png)
 
 - add interpreter ->  add local interpreter
 
-  ![image-20230406200548051](D:\pycharm-workspace\flaskStegaStamp\README.assets\image-20230406200548051.png)
+  ![image-20230406200548051](README.assets\image-20230406200548051.png)
 
 - 左边选择 conda environment，右边选择自己 anaconda 安装目录下 Scripts 目录中 conda.exe 文件，下面选择 using existing environment
 
-  ![image-20230406200823316](D:\pycharm-workspace\flaskStegaStamp\README.assets\image-20230406200823316.png)
+  ![image-20230406200823316](README.assets\image-20230406200823316.png)
 
 - 然后选择自己之前创建的虚拟环境（我这里是 Artistic）
 
-  ![image-20230406200919590](D:\pycharm-workspace\flaskStegaStamp\README.assets\image-20230406200919590.png)
+  ![image-20230406200919590](README.assets\image-20230406200919590.png)
 
 - 最后依次点击 ok，apply，ok
 
 - terminal 中出现虚拟环境的名字就设置成功了
 
-  ![image-20230406201021002](D:\pycharm-workspace\flaskStegaStamp\README.assets\image-20230406201021002.png)
+  ![image-20230406201021002](README.assets\image-20230406201021002.png)
 
 - 有爆红的包就 pip install 即可
 
